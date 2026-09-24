@@ -1,0 +1,36 @@
+<svg width="1900" height="620" viewBox="0 0 1900 620" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="wbg2" cx="38%" cy="24%" r="95%">
+      <stop offset="0%" stop-color="#17385C"/>
+      <stop offset="52%" stop-color="#0C2340"/>
+      <stop offset="100%" stop-color="#061225"/>
+    </radialGradient>
+    <radialGradient id="sun2" cx="38%" cy="34%" r="78%">
+      <stop offset="0%" stop-color="#FFF7C8"/>
+      <stop offset="40%" stop-color="#FFD35C"/>
+      <stop offset="78%" stop-color="#F79E2E"/>
+      <stop offset="100%" stop-color="#E8792B"/>
+    </radialGradient>
+    <linearGradient id="cloud2" x1="0.15" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="55%" stop-color="#E4EFFF"/>
+      <stop offset="100%" stop-color="#BBD4F5"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(40,40) scale(0.52734)">
+    <rect x="0" y="0" width="1024" height="1024" rx="232" fill="url(#wbg2)"/>
+    <circle cx="685" cy="415" r="150" fill="url(#sun2)"/>
+    <g fill="url(#cloud2)">
+      <circle cx="470" cy="590" r="155"/>
+      <circle cx="630" cy="612" r="135"/>
+      <circle cx="345" cy="650" r="100"/>
+      <rect x="330" y="585" width="410" height="145" rx="72"/>
+    </g>
+  </g>
+
+  <text x="650" y="375" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="250" font-weight="700" fill="#0C2340" letter-spacing="-4">Weather</text>
+  <text x="656" y="455" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="58" font-weight="500" fill="#4A90E2" letter-spacing="9">SSD WEATHER APP</text>
+</svg>

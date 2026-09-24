@@ -1,0 +1,39 @@
+<svg width="1600" height="1040" viewBox="0 0 1600 1040" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <rect width="1600" height="1040" fill="#F4F7F5"/>
+
+  <text x="70" y="92" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#0C2340">SSD Weather — Logo</text>
+  <text x="70" y="132" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="24" font-weight="500" fill="#6B8379">Offline-first weather app</text>
+
+  <rect x="70" y="180" width="420" height="420" rx="28" fill="#FFFFFF" stroke="#E2EAE5" stroke-width="2"/>
+  <image x="110" y="220" width="340" height="340" xlink:href="weather-icon.svg"/>
+  <text x="280" y="640" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="24" fill="#4A90E2">App Icon — on light</text>
+
+  <rect x="530" y="180" width="420" height="420" rx="28" fill="#0C1F19"/>
+  <image x="570" y="220" width="340" height="340" xlink:href="weather-icon.svg"/>
+  <text x="740" y="640" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="24" fill="#4A90E2">App Icon — on dark</text>
+
+  <rect x="990" y="180" width="540" height="420" rx="28" fill="#FFFFFF" stroke="#E2EAE5" stroke-width="2"/>
+  <text x="1024" y="228" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#0C2340">Scalability</text>
+  <image x="1024" y="300" width="256" height="256" xlink:href="weather-icon.svg"/>
+  <image x="1310" y="300" width="128" height="128" xlink:href="weather-icon.svg"/>
+  <image x="1310" y="444" width="64" height="64" xlink:href="weather-icon.svg"/>
+  <image x="1400" y="444" width="48" height="48" xlink:href="weather-icon.svg"/>
+  <image x="1470" y="452" width="32" height="32" xlink:href="weather-icon.svg"/>
+  <image x="1400" y="510" width="24" height="24" xlink:href="weather-icon.svg"/>
+  <image x="1444" y="510" width="16" height="16" xlink:href="weather-icon.svg"/>
+
+  <text x="70" y="720" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#0C2340">Monochrome mark (Android themed icon / masks)</text>
+  <rect x="70" y="744" width="1000" height="132" rx="14" fill="#E9ECEB"/>
+  <image x="130" y="774" width="72" height="72" xlink:href="weather-mark-mono.svg"/>
+  <image x="260" y="774" width="72" height="72" xlink:href="weather-mark-white.svg"/>
+  <rect x="380" y="764" width="92" height="92" rx="22" fill="#4A90E2"/>
+  <image x="390" y="774" width="72" height="72" xlink:href="weather-mark-white.svg"/>
+  <rect x="500" y="764" width="92" height="92" rx="46" fill="#0C2340"/>
+  <image x="510" y="774" width="72" height="72" xlink:href="weather-mark-white.svg"/>
+  <text x="640" y="820" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" fill="#55635C">mono on light · white · white on blue · white on navy</text>
+
+  <rect x="70" y="912" width="1460" height="100" rx="16" fill="#FFFFFF" stroke="#E2EAE5" stroke-width="2"/>
+  <image x="96" y="926" width="72" height="72" xlink:href="weather-icon.svg"/>
+  <text x="192" y="978" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="42" font-weight="700" fill="#0C2340">Weather</text>
+  <text x="372" y="976" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="500" fill="#4A90E2" letter-spacing="3">SSD WEATHER APP</text>
+</svg>

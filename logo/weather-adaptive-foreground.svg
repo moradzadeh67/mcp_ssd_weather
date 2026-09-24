@@ -1,0 +1,24 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sunF" cx="38%" cy="34%" r="78%">
+      <stop offset="0%" stop-color="#FFF7C8"/>
+      <stop offset="40%" stop-color="#FFD35C"/>
+      <stop offset="78%" stop-color="#F79E2E"/>
+      <stop offset="100%" stop-color="#E8792B"/>
+    </radialGradient>
+    <linearGradient id="cloudF" x1="0.15" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="55%" stop-color="#E4EFFF"/>
+      <stop offset="100%" stop-color="#BBD4F5"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(53,81.9) scale(0.85)">
+    <circle cx="685" cy="415" r="150" fill="url(#sunF)"/>
+    <g fill="url(#cloudF)">
+      <circle cx="470" cy="590" r="155"/>
+      <circle cx="630" cy="612" r="135"/>
+      <circle cx="345" cy="650" r="100"/>
+      <rect x="330" y="585" width="410" height="145" rx="72"/>
+    </g>
+  </g>
+</svg>

@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:async';
 
 import 'package:http/http.dart' as http;
 
 import '../models/city_model.dart';
 import '../models/weather_model.dart';
+import 'api_exceptions.dart';
 
 class ApiService {
   // Base URL for Open-Meteo Free API
@@ -24,22 +26,34 @@ class ApiService {
     String cityName = 'Tehran',
   }) async {
     final url = Uri.parse(
-      '$_baseUrl?latitude=$latitude&longitude=$longitude&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,surface_pressure&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto',
+      '$_baseUrl?latitude=$latitude&longitude=$longitude'
+      '&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,surface_pressure'
+      '&daily=weather_code,temperature_2m_max,temperature_2m_min'
+      '&hourly=temperature_2m,weather_code'
+      '&timezone=auto',
     );
 
     try {
-      final response = await http.get(url).timeout(const Duration(seconds: 10));
+      final response = await http.get(url).timeout(const Duration(seconds: 5));
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
         return WeatherModel.fromApiJson(data, cityName);
+      } else if (response.statusCode >= 500) {
+        throw ServerException(response.statusCode);
+      } else if (response.statusCode >= 400) {
+        throw ClientException(response.statusCode);
       } else {
-        throw Exception(
-          'Server error with status code: ${response.statusCode}',
-        );
+        throw const UnknownException();
       }
+    } on TimeoutException {
+      throw const ApiTimeoutException();
+    } on http.ClientException {
+      throw const NoInternetException();
+    } on ApiException {
+      rethrow;
     } catch (e) {
-      throw Exception('Failed to connect to weather service: $e');
+      throw const UnknownException();
     }
   }
 
@@ -50,7 +64,7 @@ class ApiService {
     );
 
     try {
-      final response = await http.get(url).timeout(const Duration(seconds: 10));
+      final response = await http.get(url).timeout(const Duration(seconds: 5));
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
@@ -58,13 +72,21 @@ class ApiService {
         return results
             .map((e) => CityModel.fromJson(e as Map<String, dynamic>))
             .toList();
+      } else if (response.statusCode >= 500) {
+        throw ServerException(response.statusCode);
+      } else if (response.statusCode >= 400) {
+        throw ClientException(response.statusCode);
       } else {
-        throw Exception(
-          'Server error with status code: ${response.statusCode}',
-        );
+        throw const UnknownException();
       }
+    } on TimeoutException {
+      throw const ApiTimeoutException();
+    } on http.ClientException {
+      throw const NoInternetException();
+    } on ApiException {
+      rethrow;
     } catch (e) {
-      throw Exception('Failed to search cities: $e');
+      throw const UnknownException();
     }
   }
 }

@@ -1,3 +1,66 @@
+class HourlyForecast {
+  final DateTime time;
+  final double temperature;
+  final int weatherCode;
+
+  HourlyForecast({
+    required this.time,
+    required this.temperature,
+    required this.weatherCode,
+  });
+
+  String get weatherEmoji {
+    switch (weatherCode) {
+      case 0:
+        return '☀️';
+      case 1:
+      case 2:
+      case 3:
+        return '🌤️';
+      case 45:
+      case 48:
+        return '🌫️';
+      case 51:
+      case 53:
+      case 55:
+      case 61:
+      case 63:
+      case 65:
+        return '🌧️';
+      case 71:
+      case 73:
+      case 75:
+        return '❄️';
+      case 80:
+      case 81:
+      case 82:
+        return '🌦️';
+      case 95:
+      case 96:
+      case 99:
+        return '⚡';
+      default:
+        return '🌡️';
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'time': time.toIso8601String(),
+      'temperature': temperature,
+      'weatherCode': weatherCode,
+    };
+  }
+
+  factory HourlyForecast.fromJson(Map<String, dynamic> json) {
+    return HourlyForecast(
+      time: DateTime.parse(json['time']),
+      temperature: (json['temperature'] as num).toDouble(),
+      weatherCode: (json['weatherCode'] as num).toInt(),
+    );
+  }
+}
+
 class DailyForecast {
   final DateTime date;
   final double maxTemp;
@@ -76,6 +139,7 @@ class WeatherModel {
   final String cityName;
   final DateTime lastUpdated;
   final List<DailyForecast> dailyForecasts;
+  final List<HourlyForecast> hourlyForecasts;
 
   WeatherModel({
     required this.temperature,
@@ -86,6 +150,7 @@ class WeatherModel {
     required this.cityName,
     required this.lastUpdated,
     required this.dailyForecasts,
+    this.hourlyForecasts = const [],
   });
 
   // Factory constructor for creating a WeatherModel from API response JSON
@@ -111,6 +176,26 @@ class WeatherModel {
       );
     });
 
+    List<HourlyForecast> hourlyForecasts = [];
+    if (json.containsKey('hourly') && json['hourly'] != null) {
+      final hourly = json['hourly'] as Map<String, dynamic>;
+      final List<String> hourlyTimes = List<String>.from(hourly['time']);
+      final List<double> hourlyTemps = (hourly['temperature_2m'] as List)
+          .map((e) => (e as num).toDouble())
+          .toList();
+      final List<int> hourlyCodes = List<int>.from(hourly['weather_code']);
+
+      // Take first 24 hours
+      hourlyForecasts = List.generate(
+        hourlyTimes.length > 24 ? 24 : hourlyTimes.length,
+        (i) => HourlyForecast(
+          time: DateTime.parse(hourlyTimes[i]),
+          temperature: hourlyTemps[i],
+          weatherCode: hourlyCodes[i],
+        ),
+      );
+    }
+
     return WeatherModel(
       temperature: (current['temperature_2m'] as num).toDouble(),
       humidity: (current['relative_humidity_2m'] as num).toInt(),
@@ -120,6 +205,7 @@ class WeatherModel {
       cityName: cityName,
       lastUpdated: DateTime.now(),
       dailyForecasts: forecasts,
+      hourlyForecasts: hourlyForecasts,
     );
   }
 
@@ -136,6 +222,11 @@ class WeatherModel {
       dailyForecasts: (json['dailyForecasts'] as List)
           .map((e) => DailyForecast.fromJson(e as Map<String, dynamic>))
           .toList(),
+      hourlyForecasts:
+          (json['hourlyForecasts'] as List?)
+              ?.map((e) => HourlyForecast.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
   }
 
@@ -150,6 +241,7 @@ class WeatherModel {
       'cityName': cityName,
       'lastUpdated': lastUpdated.toIso8601String(),
       'dailyForecasts': dailyForecasts.map((e) => e.toJson()).toList(),
+      'hourlyForecasts': hourlyForecasts.map((e) => e.toJson()).toList(),
     };
   }
 

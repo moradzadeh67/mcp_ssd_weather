@@ -7,8 +7,13 @@ import '../state/weather_notifier.dart';
 
 class CitySearchPage extends StatefulWidget {
   final WeatherNotifier notifier;
+  final bool addMode;
 
-  const CitySearchPage({super.key, required this.notifier});
+  const CitySearchPage({
+    super.key,
+    required this.notifier,
+    this.addMode = false,
+  });
 
   @override
   State<CitySearchPage> createState() => _CitySearchPageState();
@@ -38,13 +43,34 @@ class _CitySearchPageState extends State<CitySearchPage> {
     if (query.trim().isNotEmpty) {
       _notifier.startSearch(); // Show loader immediately
     }
-    _debounce = Timer(const Duration(milliseconds: 400), () {
-      _notifier.searchCities(query);
+    _debounce = Timer(const Duration(milliseconds: 400), () async {
+      await _notifier.searchCities(query);
+      if (_notifier.searchError != null && mounted) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted && _notifier.searchError != null) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(_notifier.searchError!)));
+          }
+        });
+      }
     });
   }
 
   Future<void> _onCitySelected(CityModel city) async {
-    await _notifier.selectCity(city);
+    if (widget.addMode) {
+      final added = await _notifier.addCity(city);
+      if (!added) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Maximum 5 cities allowed')),
+          );
+        }
+        return;
+      }
+    } else {
+      await _notifier.switchCity(city);
+    }
     if (mounted) {
       Navigator.of(context).pop();
     }
@@ -148,25 +174,37 @@ class _CitySearchPageState extends State<CitySearchPage> {
 
         // Empty state (no search yet or no results)
         if (results.isEmpty) {
+          final isSearchingEmpty = _controller.text.trim().isEmpty;
           return Center(
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.location_city,
+                  Icon(
+                    isSearchingEmpty ? Icons.location_city : Icons.search_off,
                     size: 56,
-                    color: Colors.white24,
+                    color: isSearchingEmpty ? Colors.white24 : Colors.white38,
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    _controller.text.trim().isEmpty
+                    isSearchingEmpty
                         ? 'Type a city name to search'
                         : 'No cities found for "${_controller.text.trim()}"',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: Colors.white54, fontSize: 15),
+                    style: TextStyle(
+                      color: isSearchingEmpty ? Colors.white54 : Colors.white70,
+                      fontSize: 15,
+                    ),
                   ),
+                  if (!isSearchingEmpty) ...[
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Try a different spelling or check your connection',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white38, fontSize: 13),
+                    ),
+                  ],
                 ],
               ),
             ),

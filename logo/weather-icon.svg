@@ -1,0 +1,37 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="wbg" cx="38%" cy="24%" r="95%">
+      <stop offset="0%" stop-color="#17385C"/>
+      <stop offset="52%" stop-color="#0C2340"/>
+      <stop offset="100%" stop-color="#061225"/>
+    </radialGradient>
+    <radialGradient id="sun" cx="38%" cy="34%" r="78%">
+      <stop offset="0%" stop-color="#FFF7C8"/>
+      <stop offset="40%" stop-color="#FFD35C"/>
+      <stop offset="78%" stop-color="#F79E2E"/>
+      <stop offset="100%" stop-color="#E8792B"/>
+    </radialGradient>
+    <radialGradient id="sunglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFCF6A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFCF6A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cloud" x1="0.15" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="55%" stop-color="#E4EFFF"/>
+      <stop offset="100%" stop-color="#BBD4F5"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1024" height="1024" rx="232" fill="url(#wbg)"/>
+  <rect x="8" y="8" width="1008" height="1008" rx="226" fill="none" stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="4"/>
+
+  <circle cx="685" cy="415" r="235" fill="url(#sunglow)"/>
+  <circle cx="685" cy="415" r="150" fill="url(#sun)"/>
+
+  <g fill="url(#cloud)">
+    <circle cx="470" cy="590" r="155"/>
+    <circle cx="630" cy="612" r="135"/>
+    <circle cx="345" cy="650" r="100"/>
+    <rect x="330" y="585" width="410" height="145" rx="72"/>
+  </g>
+</svg>

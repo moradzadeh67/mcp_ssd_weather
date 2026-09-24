@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../models/settings_model.dart';
 import '../models/weather_model.dart';
+import '../models/weather_alert.dart';
+import '../state/settings_notifier.dart';
 import '../state/weather_notifier.dart';
+import 'cities_page.dart';
 import 'city_search_page.dart';
+import 'settings_page.dart';
 
 class WeatherPage extends StatefulWidget {
   final WeatherNotifier notifier;
+  final SettingsNotifier? settingsNotifier;
 
-  const WeatherPage({super.key, required this.notifier});
+  const WeatherPage({super.key, required this.notifier, this.settingsNotifier});
 
   @override
   State<WeatherPage> createState() => _WeatherPageState();
@@ -22,9 +28,22 @@ class _WeatherPageState extends State<WeatherPage> {
     super.initState();
     // Use addPostFrameCallback to ensure initialization (which notifies listeners)
     // happens after the first frame is built, avoiding "setState() called during build" error.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _notifier.initialize();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _notifier.initialize();
+      if (_notifier.isOffline) {
+        _showOfflineSnackBar();
+      }
     });
+  }
+
+  void _showOfflineSnackBar() {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Showing cached data (offline)'),
+        duration: Duration(seconds: 2),
+      ),
+    );
   }
 
   @override
@@ -66,12 +85,18 @@ class _WeatherPageState extends State<WeatherPage> {
           onRetry: notifier.fetchWeather,
         );
       case WeatherStatus.success:
+        final displayName =
+            notifier.selectedCity?.displayName ?? notifier.weather!.cityName;
         return _WeatherView(
           weather: notifier.weather!,
           countryFlag: notifier.selectedCity?.countryFlag ?? '',
           isOffline: notifier.isOffline,
           onRefresh: notifier.fetchWeather,
           onSearch: _openSearch,
+          onSettings: _openSettings,
+          notifier: widget.notifier,
+          settingsNotifier: widget.settingsNotifier,
+          displayName: displayName,
         );
     }
   }
@@ -83,6 +108,17 @@ class _WeatherPageState extends State<WeatherPage> {
         builder: (_) => CitySearchPage(notifier: widget.notifier),
       ),
     );
+  }
+
+  // Open the settings page
+  void _openSettings() {
+    if (widget.settingsNotifier != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => SettingsPage(notifier: widget.settingsNotifier!),
+        ),
+      );
+    }
   }
 }
 
@@ -174,8 +210,12 @@ class _WeatherView extends StatelessWidget {
   final WeatherModel weather;
   final String countryFlag;
   final bool isOffline;
-  final VoidCallback onRefresh;
+  final Future<void> Function() onRefresh;
   final VoidCallback onSearch;
+  final VoidCallback onSettings;
+  final WeatherNotifier notifier;
+  final SettingsNotifier? settingsNotifier;
+  final String displayName;
 
   const _WeatherView({
     required this.weather,
@@ -183,12 +223,21 @@ class _WeatherView extends StatelessWidget {
     required this.isOffline,
     required this.onRefresh,
     required this.onSearch,
+    required this.onSettings,
+    required this.notifier,
+    this.settingsNotifier,
+    required this.displayName,
   });
 
-  // ----- Theme palette (light surfaces) -----
-  // We render the same gradient for any weather code, but for "sunny / bright"
-  // codes the glass cards must stay readable on the bright orange lower half.
-  // That's why the cards use a dark translucent fill (see _InfoCard).
+  // Format temperature according to selected unit in settings
+  String _formatTemp(double celsiusTemp) {
+    if (settingsNotifier != null) {
+      final settings = settingsNotifier!.settings;
+      final converted = settings.convertTemperature(celsiusTemp);
+      return '${converted.round()}${settings.temperatureUnit.symbol}';
+    }
+    return '${celsiusTemp.round()}°C';
+  }
 
   // Get gradient colors based on weather condition
   List<Color> _getBackgroundGradient() {
@@ -232,10 +281,6 @@ class _WeatherView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Use a Stack so the gradient covers the full physical screen
-    // (edge-to-edge, behind status & navigation bars), and the
-    // scrollable content uses MediaQuery padding to stay clear of
-    // the system bars while the background keeps painting under them.
     final media = MediaQuery.of(context);
     return Container(
       width: double.infinity,
@@ -250,7 +295,17 @@ class _WeatherView extends StatelessWidget {
       child: RefreshIndicator(
         color: Colors.white,
         backgroundColor: Colors.white24,
-        onRefresh: () async => onRefresh(),
+        onRefresh: () async {
+          await onRefresh();
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Weather updated'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          }
+        },
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: EdgeInsets.fromLTRB(
@@ -262,19 +317,48 @@ class _WeatherView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Search City Button (top right)
-              Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  onPressed: onSearch,
-                  tooltip: 'Search city',
-                  icon: const Icon(Icons.search, color: Colors.white),
-                  style: IconButton.styleFrom(
-                    backgroundColor: Colors.black.withValues(alpha: 0.18),
+              // Top Action Buttons (Search, Cities & Settings)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: onSearch,
+                    tooltip: 'Search city',
+                    icon: const Icon(Icons.search, color: Colors.white),
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.black.withValues(alpha: 0.18),
+                    ),
                   ),
-                ),
+                  const SizedBox(width: 8),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CitiesPage(notifier: notifier),
+                        ),
+                      );
+                    },
+                    tooltip: 'Cities',
+                    icon: const Icon(Icons.location_city, color: Colors.white),
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.black.withValues(alpha: 0.18),
+                    ),
+                  ),
+                  if (settingsNotifier != null) ...[
+                    const SizedBox(width: 8),
+                    IconButton(
+                      onPressed: onSettings,
+                      tooltip: 'Settings',
+                      icon: const Icon(Icons.settings, color: Colors.white),
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.black.withValues(alpha: 0.18),
+                      ),
+                    ),
+                  ],
+                ],
               ),
-              SizedBox(height: media.size.height * 0.005), // Pulled up
+              SizedBox(height: media.size.height * 0.003), // Pulled up
               // Offline Warning Banner
               if (isOffline) ...[
                 Container(
@@ -299,14 +383,28 @@ class _WeatherView extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: media.size.height * 0.005), // Pulled up
+                SizedBox(height: media.size.height * 0.003), // Pulled up
+              ],
+
+              // Weather Alerts
+              if (notifier.alerts.isNotEmpty) ...[
+                ...notifier.alerts.map(
+                  (alert) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: _AlertBanner(
+                      alert: alert,
+                      onTap: () => _showAlertDetails(context, alert),
+                    ),
+                  ),
+                ),
+                SizedBox(height: media.size.height * 0.003),
               ],
 
               // City Name & Last Updated
               Text.rich(
                 TextSpan(
                   children: [
-                    TextSpan(text: '${weather.cityName} '.toUpperCase()),
+                    TextSpan(text: '$displayName '.toUpperCase()),
                     TextSpan(
                       text: countryFlag,
                       style: TextStyle(
@@ -337,27 +435,27 @@ class _WeatherView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: media.size.height * 0.005), // Pulled up
+              SizedBox(height: media.size.height * 0.003), // Pulled up
               // Main Weather Display
               Text(
                 weather.weatherEmoji,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: (media.size.height * 0.075).clamp(
-                    40.0,
-                    65.0,
+                  fontSize: (media.size.height * 0.06).clamp(
+                    36.0,
+                    55.0,
                   ), // More compact
                 ),
               ),
               const SizedBox(height: 2),
               Text(
-                '${weather.temperature.round()}°C',
+                _formatTemp(weather.temperature),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: (media.size.height * 0.055).clamp(
-                    32.0,
-                    52.0,
+                  fontSize: (media.size.height * 0.045).clamp(
+                    28.0,
+                    44.0,
                   ), // More compact
                   fontWeight: FontWeight.w300,
                   height: 1.0,
@@ -374,12 +472,22 @@ class _WeatherView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: media.size.height * 0.005), // Pulled up
+              SizedBox(height: media.size.height * 0.003), // Pulled up
               // Refresh Button
               Align(
                 alignment: Alignment.center,
                 child: ElevatedButton.icon(
-                  onPressed: onRefresh,
+                  onPressed: () async {
+                    await onRefresh();
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Weather updated'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                  },
                   icon: const Icon(Icons.refresh, size: 20),
                   label: const Text('Update Weather'),
                   style: ElevatedButton.styleFrom(
@@ -396,7 +504,7 @@ class _WeatherView extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: media.size.height * 0.015), // Pulled up
+              SizedBox(height: media.size.height * 0.008), // Pulled up
               // Additional Info Grid
               Row(
                 children: [
@@ -432,13 +540,43 @@ class _WeatherView extends StatelessWidget {
                     child: _InfoCard(
                       icon: Icons.thermostat,
                       label: 'Feels Like',
-                      value: '${_calculateFeelsLike(weather).round()}°C',
+                      value: _formatTemp(_calculateFeelsLike(weather)),
                     ),
                   ),
                 ],
               ),
 
-              SizedBox(height: media.size.height * 0.015), // Pulled up
+              SizedBox(height: media.size.height * 0.008), // Pulled up
+              // ===================== Hourly Forecast =====================
+              const Text(
+                'HOURLY FORECAST',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                ),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                height: (media.size.height * 0.12).clamp(80.0, 100.0),
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: weather.hourlyForecasts.length,
+                  separatorBuilder: (_, _) => const SizedBox(width: 10),
+                  itemBuilder: (context, index) {
+                    final hour = weather.hourlyForecasts[index];
+                    return _HourlyCard(
+                      forecast: hour,
+                      isNow: index == 0,
+                      settings:
+                          settingsNotifier?.settings ?? const SettingsModel(),
+                    );
+                  },
+                ),
+              ),
+
+              SizedBox(height: media.size.height * 0.008), // Pulled up
               // ===================== 7-Day Forecast =====================
               const Text(
                 '7-DAY FORECAST',
@@ -451,10 +589,7 @@ class _WeatherView extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               SizedBox(
-                height: (media.size.height * 0.25).clamp(
-                  215.0,
-                  245.0,
-                ), // Safely balanced height
+                height: (media.size.height * 0.18).clamp(140.0, 165.0),
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: weather.dailyForecasts.length,
@@ -462,13 +597,17 @@ class _WeatherView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final forecast = weather.dailyForecasts[index];
                     final isToday = index == 0;
-                    return _ForecastCard(forecast: forecast, isToday: isToday);
+                    return _ForecastCard(
+                      forecast: forecast,
+                      isToday: isToday,
+                      settingsNotifier: settingsNotifier,
+                    );
                   },
                 ),
               ),
               SizedBox(
-                height: media.size.height * 0.07,
-              ), // 7% Empty space at bottom
+                height: media.size.height * 0.02,
+              ), // 2% Empty space at bottom
             ],
           ),
         ),
@@ -490,6 +629,70 @@ class _WeatherView extends StatelessWidget {
     final humidity = weather.humidity;
     final dewPoint = temp - ((100 - humidity) / 5);
     return dewPoint + 5;
+  }
+}
+
+// ===================== Hourly Card =====================
+class _HourlyCard extends StatelessWidget {
+  final HourlyForecast forecast;
+  final bool isNow;
+  final SettingsModel settings;
+
+  const _HourlyCard({
+    required this.forecast,
+    required this.isNow,
+    required this.settings,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
+    final temp = settings.convertTemperature(forecast.temperature);
+
+    return Container(
+      width: (media.size.width * 0.15).clamp(60.0, 75.0),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+      decoration: BoxDecoration(
+        color: isNow
+            ? Colors.black.withValues(alpha: 0.20)
+            : Colors.black.withValues(alpha: 0.30),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: isNow
+              ? Colors.white.withValues(alpha: 0.4)
+              : Colors.white.withValues(alpha: 0.05),
+          width: isNow ? 1.5 : 1,
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            isNow ? 'Now' : _formatHour(forecast.time),
+            style: TextStyle(
+              color: isNow ? Colors.white : Colors.white70,
+              fontSize: 10,
+              fontWeight: isNow ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(forecast.weatherEmoji, style: const TextStyle(fontSize: 18)),
+          const SizedBox(height: 4),
+          Text(
+            '${temp.round()}${settings.temperatureUnit.symbol}',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatHour(DateTime time) {
+    return '${time.hour.toString().padLeft(2, '0')}:00';
   }
 }
 
@@ -557,18 +760,32 @@ class _InfoCard extends StatelessWidget {
 class _ForecastCard extends StatelessWidget {
   final DailyForecast forecast;
   final bool isToday;
+  final SettingsNotifier? settingsNotifier;
 
-  const _ForecastCard({required this.forecast, required this.isToday});
+  const _ForecastCard({
+    required this.forecast,
+    required this.isToday,
+    this.settingsNotifier,
+  });
+
+  String _formatForecastTemp(double celsiusTemp) {
+    if (settingsNotifier != null) {
+      final settings = settingsNotifier!.settings;
+      final converted = settings.convertTemperature(celsiusTemp);
+      return '${converted.round()}°';
+    }
+    return '${celsiusTemp.round()}°';
+  }
 
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
     return Container(
-      width: (media.size.width * 0.33).clamp(125.0, 160.0), // Wider for balance
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+      width: (media.size.width * 0.22).clamp(85.0, 110.0),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
       decoration: BoxDecoration(
-        // Darker alpha (0.28) for maximum contrast.
-        color: Colors.white.withValues(alpha: 0.28),
+        // Darker alpha (0.25) for maximum contrast.
+        color: Colors.black.withValues(alpha: 0.25),
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
       ),
@@ -579,43 +796,31 @@ class _ForecastCard extends StatelessWidget {
             isToday ? 'Today' : _getDayName(forecast.date),
             style: TextStyle(
               color: isToday ? Colors.white : Colors.white70,
-              fontSize: (media.size.width * 0.05).clamp(
-                17.0,
-                20.0,
-              ), // Larger responsive
+              fontSize: (media.size.width * 0.035).clamp(12.0, 14.0),
               fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 6),
           Text(
             forecast.weatherEmoji,
             style: TextStyle(
-              fontSize: (media.size.width * 0.12).clamp(
-                44.0,
-                54.0,
-              ), // Larger responsive
+              fontSize: (media.size.width * 0.07).clamp(26.0, 32.0),
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 6),
           Text(
-            '${forecast.maxTemp.round()}°',
+            _formatForecastTemp(forecast.maxTemp),
             style: TextStyle(
               color: Colors.white,
-              fontSize: (media.size.width * 0.07).clamp(
-                24.0,
-                30.0,
-              ), // Larger responsive
+              fontSize: (media.size.width * 0.045).clamp(16.0, 20.0),
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            '${forecast.minTemp.round()}°',
+            _formatForecastTemp(forecast.minTemp),
             style: TextStyle(
               color: Colors.white54,
-              fontSize: (media.size.width * 0.055).clamp(
-                20.0,
-                26.0,
-              ), // Larger responsive
+              fontSize: (media.size.width * 0.035).clamp(13.0, 16.0),
             ),
           ),
         ],
@@ -627,4 +832,100 @@ class _ForecastCard extends StatelessWidget {
     final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     return days[date.weekday - 1];
   }
+}
+
+// ===================== Alert Banner =====================
+class _AlertBanner extends StatelessWidget {
+  final WeatherAlert alert;
+  final VoidCallback onTap;
+
+  const _AlertBanner({required this.alert, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: alert.severity.color.withValues(alpha: 0.85),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+        ),
+        child: Row(
+          children: [
+            Icon(alert.severity.icon, color: Colors.white, size: 20),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                alert.title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const Icon(Icons.chevron_right, color: Colors.white70, size: 18),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ===================== Alert Details Dialog =====================
+void _showAlertDetails(BuildContext context, WeatherAlert alert) {
+  showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      backgroundColor: const Color(0xFF1A2D45),
+      title: Row(
+        children: [
+          Icon(alert.severity.icon, color: alert.severity.color),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              alert.title,
+              style: const TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          ),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: alert.severity.color.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Text(
+              alert.severity.label.toUpperCase(),
+              style: TextStyle(
+                color: alert.severity.color,
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            alert.message,
+            style: const TextStyle(color: Colors.white70, fontSize: 14),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx),
+          child: const Text('OK'),
+        ),
+      ],
+    ),
+  );
 }

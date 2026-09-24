@@ -1,9 +1,211 @@
-# Miscellaneous
+# Flutter/Dart/Pub related
+**/doc/api/
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Android
+android/app/debug
+android/app/profile
+android/app/release
+
+# iOS/Swift
+*.development.xcworkspace
+*.xcworkspace
+*.xcworkspace/
+*.xcodeproj
+*.xcworkspace/project.pbxproj
+*.xcworkspacedata
+*.xcodeproj/project.xcworkspace/
+
+# macOS
+*.xcworkspace
+*.xcodeproj
+
+# Node.js/npm
+node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+
+# Build artifacts
+*.apk
+*.aab
+*.ipa
+
+# Flutter packages (not needed for reproduction)
+flutter_packages/
+
+# Test results
+coverage.html
+
+# Log files
+*.log
+
+# Certificates
+certificates/
+.key
+.jks
+
+# Documentation
+doc/
+
+# Temporary files
+temp/
+
+# Analytics
+*.analytics
+
+# Third party libraries
+external/
+
+# Build caches
+.gradle/
+.apt
+
+# Gradle
+gradle-wrapper.jar
+
+# Maven
+target/
+
+# Subversion
+svn-worktree
+
+# Others
+*.coverage
+*.coveragerc
+*.coveralls
+
+# Misc
+*.swp
+*.swo
+*.DS_Store
+*.DS_Store?
+
+# Editor backups
+*~
+
+# System files
+System Volumes
+
+# Android Studio specific
+sdk/build.gradle
+
+# Intellij IDEA
+.idea/
+*.iws
+*.iml
+
+# VS Code
+.vscode/
+
+# Local
+.vscode/
+**/.vscode/
+.vscode/**
+!.vscode/settings.json
+
+# Yarn
+cache/
+
+# npm
+node_modules/
+
+# Bower
+components/
+
+# bower_components/
+
+# Outlined files
+*.outlinered
+
+# Generated files
+*.generated
+
+# Documentation files
+doc/
+
+# Test coverage
+coverage/
+
+# Temporary files
+*.tmp
+
+# Backup files
+*.bak
+
+# Config files
+*.config
+
+# Secrets
+secrets.txt
+
+# SSH keys
+id_rsa
+id_rsa.pub
+
+# Environment files
+.env
+.env.local
+
+# Logs
+logs/
+
+# Icons
+*.icns
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Audio files
+*.mp3
+*.wav
+
+# Video files
+*.mp4
+*.avi
+
+# Font files
+*.ttf
+*.otf
+
+# Archives
+*.zip
+*.tar
+*.gz
+
+# Executables
+*.exe
+*.sh
+
+# Project specific
+*.build
+*.deployment
+
+# Build artifacts
 *.class
 *.log
 *.pyc
 *.swp
-.DS_Store
+*.DS_Store
 .atom/
 .build/
 .buildlog/
@@ -17,11 +219,6 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/

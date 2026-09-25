@@ -179,6 +179,13 @@ This project is actively developed and tested using:
 - **iOS/macOS Build Toolchain**: Xcode 14+
 - **Flutter Framework**: Flutter 3.13+
 
+## 🙏 Credits & Attribution
+
+- **[Open-Meteo](https://open-meteo.com)** — Weather data (CC BY 4.0)
+- **[MCP Toolkit](https://pub.dev/packages/mcp_toolkit)** — AI-agent integration
+
+Weather data by Open-Meteo.com
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to get started.

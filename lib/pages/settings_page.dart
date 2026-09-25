@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/settings_model.dart';
 import '../state/settings_notifier.dart';
@@ -111,6 +112,30 @@ class SettingsPage extends StatelessWidget {
                     fontSize: 12,
                   ),
                 ),
+              ),
+              const Divider(),
+              ListTile(
+                leading: Icon(
+                  Icons.cloud_outlined,
+                  color: AppTheme.textSecondary(context),
+                ),
+                title: Text(
+                  'Weather data by Open-Meteo',
+                  style: TextStyle(color: AppTheme.textPrimary(context)),
+                ),
+                subtitle: Text(
+                  'open-meteo.com',
+                  style: TextStyle(
+                    color: AppTheme.textSecondary(context),
+                    fontSize: 12,
+                  ),
+                ),
+                onTap: () async {
+                  final url = Uri.parse('https://open-meteo.com');
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  }
+                },
               ),
             ],
           );

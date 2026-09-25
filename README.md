@@ -47,59 +47,59 @@ This reflects how **modern Flutter development** works — AI handles implementa
 
 **Light Mode**
 
-<img src="assets/screenshots/android/home_light.png" width="180" />
-<img src="assets/screenshots/android/settings_light.png" width="180" />
-<img src="assets/screenshots/android/search_light.png" width="180" />
-<img src="assets/screenshots/android/cities_light.png" width="180" />
+| Home | Settings | Search | Cities |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/android/home_light.png" width="150" /> | <img src="assets/screenshots/android/settings_light.png" width="150" /> | <img src="assets/screenshots/android/search_light.png" width="150" /> | <img src="assets/screenshots/android/cities_light.png" width="150" /> |
 
 **Dark Mode**
 
-<img src="assets/screenshots/android/home_dark.png" width="180" />
-<img src="assets/screenshots/android/settings_dark.png" width="180" />
+| Home | Settings | (Empty) | (Empty) |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/android/home_dark.png" width="150" /> | <img src="assets/screenshots/android/settings_dark.png" width="150" /> | | |
 
 ### iOS
 
 **Light Mode**
 
-<img src="assets/screenshots/ios/home_light.png" width="180" />
-<img src="assets/screenshots/ios/settings_light.png" width="180" />
-<img src="assets/screenshots/ios/search_light.png" width="180" />
-<img src="assets/screenshots/ios/cities_light.png" width="180" />
+| Home | Settings | Search | Cities |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/ios/home_light.png" width="150" /> | <img src="assets/screenshots/ios/settings_light.png" width="150" /> | <img src="assets/screenshots/ios/search_light.png" width="150" /> | <img src="assets/screenshots/ios/cities_light.png" width="150" /> |
 
 **Dark Mode**
 
-<img src="assets/screenshots/ios/home_dark.png" width="180" />
-<img src="assets/screenshots/ios/settings_dark.png" width="180" />
+| Home | Settings | (Empty) | (Empty) |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/ios/home_dark.png" width="150" /> | <img src="assets/screenshots/ios/settings_dark.png" width="150" /> | | |
 
 ### macOS
 
 **Light Mode**
 
-<img src="assets/screenshots/macos/home_light.png" width="180" />
-<img src="assets/screenshots/macos/settings_light.png" width="180" />
-<img src="assets/screenshots/macos/search_light.png" width="180" />
-<img src="assets/screenshots/macos/cities_light.png" width="180" />
+| Home | Settings | Search | Cities |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/macos/home_light.png" width="150" /> | <img src="assets/screenshots/macos/settings_light.png" width="150" /> | <img src="assets/screenshots/macos/search_light.png" width="150" /> | <img src="assets/screenshots/macos/cities_light.png" width="150" /> |
 
 **Dark Mode**
 
-<img src="assets/screenshots/macos/home_dark.png" width="180" />
-<img src="assets/screenshots/macos/settings_dark.png" width="180" />
+| Home | Settings | (Empty) | (Empty) |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/macos/home_dark.png" width="150" /> | <img src="assets/screenshots/macos/settings_dark.png" width="150" /> | | |
 
 ### Web
 
 **Light Mode**
 
-<img src="assets/screenshots/web/home_light.png" width="180" />
-<img src="assets/screenshots/web/settings_light.png" width="180" />
-<img src="assets/screenshots/web/search_light.png" width="180" />
-<img src="assets/screenshots/web/cities_light.png" width="180" />
+| Home | Settings | Search | Cities |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/web/home_light.png" width="150" /> | <img src="assets/screenshots/web/settings_light.png" width="150" /> | <img src="assets/screenshots/web/search_light.png" width="150" /> | <img src="assets/screenshots/web/cities_light.png" width="150" /> |
 
 **Dark Mode**
 
-<img src="assets/screenshots/web/home_dark.png" width="180" />
-<img src="assets/screenshots/web/settings_dark.png" width="180" />
+| Home | Settings | (Empty) | (Empty) |
+|:---:|:---:|:---:|:---:|
+| <img src="assets/screenshots/web/home_dark.png" width="150" /> | <img src="assets/screenshots/web/settings_dark.png" width="150" /> | | |
 
-> 💡 **Note:** Screenshots are stored in `assets/screenshots/` and organized by platform.
+> 💡 **Note:** Screenshots are stored in `assets/screenshots/` and organized by platform and theme.
 
 ## ✨ Features
 

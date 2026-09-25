@@ -17,26 +17,54 @@ MCP SSD Weather is my attempt at a **production-ready weather app**: adaptive UI
 ## 📸 Screenshots
 
 ### Android
+
+**Light Mode**
 | Home | Settings | Search | Cities |
 |:---:|:---:|:---:|:---:|
 | ![Home](assets/screenshots/android/home_light.png) | ![Settings](assets/screenshots/android/settings_light.png) | ![Search](assets/screenshots/android/search_light.png) | ![Cities](assets/screenshots/android/cities_light.png) |
 
+**Dark Mode**
+| Home | Settings |
+|:---:|:---:|
+| ![Home Dark](assets/screenshots/android/home_dark.png) | ![Settings Dark](assets/screenshots/android/settings_dark.png) |
+
 ### iOS
+
+**Light Mode**
 | Home | Settings | Search | Cities |
 |:---:|:---:|:---:|:---:|
 | ![Home](assets/screenshots/ios/home_light.png) | ![Settings](assets/screenshots/ios/settings_light.png) | ![Search](assets/screenshots/ios/search_light.png) | ![Cities](assets/screenshots/ios/cities_light.png) |
 
+**Dark Mode**
+| Home | Settings |
+|:---:|:---:|
+| ![Home Dark](assets/screenshots/ios/home_dark.png) | ![Settings Dark](assets/screenshots/ios/settings_dark.png) |
+
 ### macOS
+
+**Light Mode**
 | Home | Settings | Search | Cities |
 |:---:|:---:|:---:|:---:|
 | ![Home](assets/screenshots/macos/home_light.png) | ![Settings](assets/screenshots/macos/settings_light.png) | ![Search](assets/screenshots/macos/search_light.png) | ![Cities](assets/screenshots/macos/cities_light.png) |
 
+**Dark Mode**
+| Home | Settings |
+|:---:|:---:|
+| ![Home Dark](assets/screenshots/macos/home_dark.png) | ![Settings Dark](assets/screenshots/macos/settings_dark.png) |
+
 ### Web
+
+**Light Mode**
 | Home | Settings | Search | Cities |
 |:---:|:---:|:---:|:---:|
 | ![Home](assets/screenshots/web/home_light.png) | ![Settings](assets/screenshots/web/settings_light.png) | ![Search](assets/screenshots/web/search_light.png) | ![Cities](assets/screenshots/web/cities_light.png) |
 
-> 💡 **Note:** Screenshots are stored in `assets/screenshots/` and organized by platform.
+**Dark Mode**
+| Home | Settings |
+|:---:|:---:|
+| ![Home Dark](assets/screenshots/web/home_dark.png) | ![Settings Dark](assets/screenshots/web/settings_dark.png) |
+
+> 💡 **Note:** Screenshots are stored in `assets/screenshots/` and organized by platform and theme.
 
 ## ✨ Features
 

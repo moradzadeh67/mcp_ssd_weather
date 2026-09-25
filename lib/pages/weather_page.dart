@@ -605,11 +605,11 @@ class _WeatherView extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               SizedBox(
-                height: (media.size.height * 0.12).clamp(80.0, 100.0),
+                height: 100,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: weather.hourlyForecasts.length,
-                  separatorBuilder: (_, _) => const SizedBox(width: 10),
+                  separatorBuilder: (_, _) => const SizedBox(width: 8),
                   itemBuilder: (context, index) {
                     final hour = weather.hourlyForecasts[index];
                     return _HourlyCard(
@@ -635,7 +635,10 @@ class _WeatherView extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               SizedBox(
-                height: (media.size.height * 0.18).clamp(140.0, 165.0),
+                height: (MediaQuery.sizeOf(context).height * 0.18).clamp(
+                  120.0,
+                  160.0,
+                ),
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: weather.dailyForecasts.length,
@@ -692,12 +695,11 @@ class _HourlyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context);
     final temp = settings.convertTemperature(forecast.temperature);
 
     return Container(
-      width: (media.size.width * 0.15).clamp(60.0, 75.0),
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+      width: 58,
+      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 4),
       decoration: BoxDecoration(
         color: isNow
             ? Colors.black.withValues(alpha: 0.20)
@@ -711,24 +713,25 @@ class _HourlyCard extends StatelessWidget {
         ),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             isNow ? 'Now' : _formatHour(forecast.time),
             style: TextStyle(
               color: isNow ? Colors.white : Colors.white70,
-              fontSize: 10,
+              fontSize: 9,
               fontWeight: isNow ? FontWeight.bold : FontWeight.normal,
             ),
           ),
-          const SizedBox(height: 4),
-          Text(forecast.weatherEmoji, style: const TextStyle(fontSize: 18)),
-          const SizedBox(height: 4),
+          const SizedBox(height: 1),
+          Text(forecast.weatherEmoji, style: const TextStyle(fontSize: 14)),
+          const SizedBox(height: 1),
           Text(
             '${temp.round()}${settings.temperatureUnit.symbol}',
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 12,
+              fontSize: 10,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -825,49 +828,40 @@ class _ForecastCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context);
     return Container(
-      width: (media.size.width * 0.22).clamp(85.0, 110.0),
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+      width: (MediaQuery.sizeOf(context).width * 0.25).clamp(70.0, 95.0),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 6),
       decoration: BoxDecoration(
-        // Darker alpha (0.25) for maximum contrast.
         color: Colors.black.withValues(alpha: 0.25),
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             isToday ? 'Today' : _getDayName(forecast.date),
             style: TextStyle(
               color: isToday ? Colors.white : Colors.white70,
-              fontSize: (media.size.width * 0.030).clamp(11.0, 13.0),
+              fontSize: 11,
               fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
             ),
           ),
-          const SizedBox(height: 4),
-          Text(
-            forecast.weatherEmoji,
-            style: TextStyle(
-              fontSize: (media.size.width * 0.055).clamp(22.0, 28.0),
-            ),
-          ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 2),
+          Text(forecast.weatherEmoji, style: const TextStyle(fontSize: 20)),
+          const SizedBox(height: 2),
           Text(
             _formatForecastTemp(forecast.maxTemp),
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
-              fontSize: (media.size.width * 0.040).clamp(14.0, 18.0),
+              fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             _formatForecastTemp(forecast.minTemp),
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: (media.size.width * 0.030).clamp(12.0, 14.0),
-            ),
+            style: const TextStyle(color: Colors.white54, fontSize: 12),
           ),
         ],
       ),

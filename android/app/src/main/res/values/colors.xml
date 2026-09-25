@@ -2,4 +2,5 @@
 <resources>
     <!-- App's dark navy background, used by the launch splash screen -->
     <color name="launch_background">#FF0B1D33</color>
+	<color name="ic_launcher_background">#0C2340</color>
 </resources>

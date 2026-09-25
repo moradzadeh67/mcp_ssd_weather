@@ -6,11 +6,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mcp_toolkit/mcp_toolkit.dart';
 
 import 'pages/weather_page.dart';
-import 'models/settings_model.dart';
 import 'services/api_service.dart';
 import 'services/storage_service.dart';
 import 'state/settings_notifier.dart';
 import 'state/weather_notifier.dart';
+import 'theme/app_theme.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -78,21 +78,9 @@ class WeatherApp extends StatelessWidget {
         return MaterialApp(
           title: 'Weather App',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            useMaterial3: true,
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xFF0B1D33),
-              brightness: Brightness.light,
-            ),
-          ),
-          darkTheme: ThemeData(
-            useMaterial3: true,
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xFF0B1D33),
-              brightness: Brightness.dark,
-            ),
-          ),
-          themeMode: _getThemeMode(settingsNotifier.themeMode),
+          theme: AppTheme.light(),
+          darkTheme: AppTheme.dark(),
+          themeMode: settingsNotifier.themeMode.toThemeMode(),
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -105,16 +93,5 @@ class WeatherApp extends StatelessWidget {
         );
       },
     );
-  }
-
-  ThemeMode _getThemeMode(AppThemeMode mode) {
-    switch (mode) {
-      case AppThemeMode.system:
-        return ThemeMode.system;
-      case AppThemeMode.light:
-        return ThemeMode.light;
-      case AppThemeMode.dark:
-        return ThemeMode.dark;
-    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/city_model.dart';
 import '../state/weather_notifier.dart';
+import '../theme/app_theme.dart';
 import 'city_search_page.dart';
 
 class CitiesPage extends StatelessWidget {
@@ -12,15 +13,17 @@ class CitiesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0B1D33),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
+        title: Text(
           'Cities',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: AppTheme.textPrimary(context),
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: AppTheme.textPrimary(context)),
       ),
       floatingActionButton: ListenableBuilder(
         listenable: notifier,
@@ -28,8 +31,8 @@ class CitiesPage extends StatelessWidget {
           if (!notifier.canAddMoreCities) return const SizedBox.shrink();
           return FloatingActionButton(
             onPressed: () => _openSearch(context),
-            backgroundColor: Colors.white,
-            foregroundColor: const Color(0xFF0B1D33),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Theme.of(context).colorScheme.onPrimary,
             child: const Icon(Icons.add),
           );
         },
@@ -41,17 +44,29 @@ class CitiesPage extends StatelessWidget {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.location_city, size: 64, color: Colors.white24),
-                  SizedBox(height: 16),
+                children: [
+                  Icon(
+                    Icons.location_city,
+                    size: 64,
+                    color: AppTheme.textSecondary(
+                      context,
+                    ).withValues(alpha: 0.3),
+                  ),
+                  const SizedBox(height: 16),
                   Text(
                     'No cities saved yet',
-                    style: TextStyle(color: Colors.white54, fontSize: 16),
+                    style: TextStyle(
+                      color: AppTheme.textSecondary(context),
+                      fontSize: 16,
+                    ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     'Tap + to add a city',
-                    style: TextStyle(color: Colors.white38, fontSize: 13),
+                    style: TextStyle(
+                      color: AppTheme.textSecondary(context),
+                      fontSize: 13,
+                    ),
                   ),
                 ],
               ),
@@ -116,15 +131,18 @@ class CitiesPage extends StatelessWidget {
     final result = await showDialog<String?>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1A2D45),
-        title: const Text('Rename city', style: TextStyle(color: Colors.white)),
+        backgroundColor: AppTheme.surface(ctx),
+        title: Text(
+          'Rename city',
+          style: TextStyle(color: AppTheme.textPrimary(ctx)),
+        ),
         content: TextField(
           controller: controller,
           autofocus: true,
-          style: const TextStyle(color: Colors.white),
-          decoration: const InputDecoration(
+          style: TextStyle(color: AppTheme.textPrimary(ctx)),
+          decoration: InputDecoration(
             hintText: 'New name (leave empty to reset)',
-            hintStyle: TextStyle(color: Colors.white38),
+            hintStyle: TextStyle(color: AppTheme.textSecondary(ctx)),
           ),
         ),
         actions: [
@@ -161,16 +179,28 @@ class _CityTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = AppTheme.isDark(context);
+    final surfaceColor = AppTheme.surface(context);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isActive
-            ? Colors.white.withValues(alpha: 0.25)
-            : Colors.white.withValues(alpha: 0.10),
+        color: isDark
+            ? (isActive ? surfaceColor : surfaceColor.withValues(alpha: 0.5))
+            : (isActive
+                  ? Theme.of(context).colorScheme.primaryContainer
+                  : surfaceColor),
         borderRadius: BorderRadius.circular(16),
         border: isActive
-            ? Border.all(color: Colors.white.withValues(alpha: 0.4), width: 1.5)
-            : null,
+            ? Border.all(
+                color: Theme.of(context).colorScheme.primary,
+                width: 1.5,
+              )
+            : Border.all(
+                color: isDark
+                    ? Colors.transparent
+                    : Colors.grey.withValues(alpha: 0.2),
+              ),
       ),
       child: ListTile(
         onTap: onTap,
@@ -181,14 +211,18 @@ class _CityTile extends StatelessWidget {
             Text(
               city.displayName,
               style: TextStyle(
-                color: Colors.white,
+                color: AppTheme.textPrimary(context),
                 fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
                 fontSize: 16,
               ),
             ),
             if (city.hasCustomLabel) ...[
               const SizedBox(width: 6),
-              const Icon(Icons.edit, size: 14, color: Colors.white54),
+              Icon(
+                Icons.edit,
+                size: 14,
+                color: AppTheme.textSecondary(context),
+              ),
             ],
           ],
         ),
@@ -196,11 +230,17 @@ class _CityTile extends StatelessWidget {
             ? null
             : Text(
                 city.locationLabel,
-                style: const TextStyle(color: Colors.white54, fontSize: 13),
+                style: TextStyle(
+                  color: AppTheme.textSecondary(context),
+                  fontSize: 13,
+                ),
               ),
         trailing: isActive
-            ? const Icon(Icons.check_circle, color: Colors.white)
-            : const Icon(Icons.chevron_right, color: Colors.white38),
+            ? Icon(
+                Icons.check_circle,
+                color: Theme.of(context).colorScheme.primary,
+              )
+            : Icon(Icons.chevron_right, color: AppTheme.textSecondary(context)),
       ),
     );
   }

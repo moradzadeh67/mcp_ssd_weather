@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../models/city_model.dart';
 import '../state/weather_notifier.dart';
+import '../theme/app_theme.dart';
 
 class CitySearchPage extends StatefulWidget {
   final WeatherNotifier notifier;
@@ -79,15 +80,17 @@ class _CitySearchPageState extends State<CitySearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0B1D33),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
+        title: Text(
           'Search City',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: AppTheme.textPrimary(context),
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: AppTheme.textPrimary(context)),
       ),
       // Full-screen background; AppBar handles the top inset and
       // SafeArea keeps the list clear of the bottom navigation bar.
@@ -107,26 +110,58 @@ class _CitySearchPageState extends State<CitySearchPage> {
                 controller: _controller,
                 autofocus: true,
                 onChanged: _onQueryChanged,
-                style: const TextStyle(color: Colors.white, fontSize: 16),
-                cursorColor: Colors.white70,
+                style: TextStyle(
+                  color: AppTheme.textPrimary(context),
+                  fontSize: 16,
+                ),
+                cursorColor: AppTheme.textSecondary(context),
                 decoration: InputDecoration(
                   hintText: 'e.g. Shiraz, Dubai, London...',
-                  hintStyle: const TextStyle(color: Colors.white38),
-                  prefixIcon: const Icon(Icons.search, color: Colors.white54),
+                  hintStyle: TextStyle(color: AppTheme.textSecondary(context)),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: AppTheme.textSecondary(context),
+                  ),
                   suffixIcon: _controller.text.isEmpty
                       ? null
                       : IconButton(
-                          icon: const Icon(Icons.clear, color: Colors.white54),
+                          icon: Icon(
+                            Icons.clear,
+                            color: AppTheme.textSecondary(context),
+                          ),
                           onPressed: () {
                             _controller.clear();
                             _notifier.resetSearch();
                           },
                         ),
                   filled: true,
-                  fillColor: Colors.white.withValues(alpha: 0.10),
+                  fillColor: AppTheme.isDark(context)
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : Colors.black.withValues(alpha: 0.05),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
+                    borderSide: BorderSide(
+                      color: AppTheme.isDark(context)
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : Colors.black.withValues(alpha: 0.15),
+                      width: 1.5,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(
+                      color: AppTheme.isDark(context)
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : Colors.black.withValues(alpha: 0.15),
+                      width: 1.5,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2,
+                    ),
                   ),
                 ),
               ),
@@ -144,8 +179,10 @@ class _CitySearchPageState extends State<CitySearchPage> {
       builder: (context, _) {
         // Loading state
         if (_notifier.isSearching) {
-          return const Center(
-            child: CircularProgressIndicator(color: Colors.white70),
+          return Center(
+            child: CircularProgressIndicator(
+              color: AppTheme.textSecondary(context),
+            ),
           );
         }
 
@@ -157,12 +194,19 @@ class _CitySearchPageState extends State<CitySearchPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.cloud_off, size: 56, color: Colors.white38),
+                  Icon(
+                    Icons.cloud_off,
+                    size: 56,
+                    color: AppTheme.textSecondary(context),
+                  ),
                   const SizedBox(height: 12),
                   Text(
                     _notifier.searchError!,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: Colors.white70, fontSize: 15),
+                    style: TextStyle(
+                      color: AppTheme.textSecondary(context),
+                      fontSize: 15,
+                    ),
                   ),
                 ],
               ),
@@ -184,7 +228,7 @@ class _CitySearchPageState extends State<CitySearchPage> {
                   Icon(
                     isSearchingEmpty ? Icons.location_city : Icons.search_off,
                     size: 56,
-                    color: isSearchingEmpty ? Colors.white24 : Colors.white38,
+                    color: AppTheme.textSecondary(context),
                   ),
                   const SizedBox(height: 12),
                   Text(
@@ -193,16 +237,19 @@ class _CitySearchPageState extends State<CitySearchPage> {
                         : 'No cities found for "${_controller.text.trim()}"',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: isSearchingEmpty ? Colors.white54 : Colors.white70,
+                      color: AppTheme.textPrimary(context),
                       fontSize: 15,
                     ),
                   ),
                   if (!isSearchingEmpty) ...[
                     const SizedBox(height: 8),
-                    const Text(
+                    Text(
                       'Try a different spelling or check your connection',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white38, fontSize: 13),
+                      style: TextStyle(
+                        color: AppTheme.textSecondary(context),
+                        fontSize: 13,
+                      ),
                     ),
                   ],
                 ],
@@ -215,16 +262,15 @@ class _CitySearchPageState extends State<CitySearchPage> {
         return ListView.separated(
           padding: const EdgeInsets.symmetric(vertical: 8),
           itemCount: results.length,
-          separatorBuilder: (_, _) => const Divider(
-            height: 1,
-            color: Colors.white12,
-            indent: 16,
-            endIndent: 16,
-          ),
+          separatorBuilder: (_, _) =>
+              const Divider(height: 1, indent: 16, endIndent: 16),
           itemBuilder: (context, index) {
             final city = results[index];
             return ListTile(
-              leading: const Icon(Icons.place_outlined, color: Colors.white54),
+              leading: Icon(
+                Icons.place_outlined,
+                color: AppTheme.textSecondary(context),
+              ),
               title: Text.rich(
                 TextSpan(
                   children: [
@@ -238,8 +284,8 @@ class _CitySearchPageState extends State<CitySearchPage> {
                     TextSpan(text: ' (${city.countryCode})'),
                   ],
                 ),
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: AppTheme.textPrimary(context),
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -248,12 +294,15 @@ class _CitySearchPageState extends State<CitySearchPage> {
                   ? null
                   : Text(
                       city.locationLabel,
-                      style: const TextStyle(
-                        color: Colors.white54,
+                      style: TextStyle(
+                        color: AppTheme.textSecondary(context),
                         fontSize: 13,
                       ),
                     ),
-              trailing: const Icon(Icons.chevron_right, color: Colors.white38),
+              trailing: Icon(
+                Icons.chevron_right,
+                color: AppTheme.textSecondary(context),
+              ),
               onTap: () => _onCitySelected(city),
             );
           },

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../models/settings_model.dart';
 import '../state/settings_notifier.dart';
+import '../theme/app_theme.dart';
 
 class SettingsPage extends StatelessWidget {
   final SettingsNotifier notifier;
@@ -13,15 +14,17 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0B1D33),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
+        title: Text(
           'Settings',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: AppTheme.textPrimary(context),
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: AppTheme.textPrimary(context)),
       ),
       body: ListenableBuilder(
         listenable: notifier,
@@ -34,27 +37,31 @@ class SettingsPage extends StatelessWidget {
                 (unit) => RadioListTile<TemperatureUnit>(
                   title: Text(
                     unit.label,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: AppTheme.textPrimary(context)),
                   ),
                   value: unit,
                   groupValue: notifier.temperatureUnit,
                   onChanged: (v) {
                     if (v != null) notifier.setTemperatureUnit(v);
                   },
-                  activeColor: Colors.white,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
               ),
-              const Divider(color: Colors.white24),
-              _SectionHeader('Appearance'),
+              const Divider(),
+              const _SectionHeader('Appearance'),
               ...AppThemeMode.values.map(
                 (mode) => RadioListTile<AppThemeMode>(
                   title: Row(
                     children: [
-                      Icon(mode.icon, color: Colors.white70, size: 20),
+                      Icon(
+                        mode.icon,
+                        color: AppTheme.textSecondary(context),
+                        size: 20,
+                      ),
                       const SizedBox(width: 10),
                       Text(
                         mode.label,
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: AppTheme.textPrimary(context)),
                       ),
                     ],
                   ),
@@ -63,37 +70,46 @@ class SettingsPage extends StatelessWidget {
                   onChanged: (v) {
                     if (v != null) notifier.setThemeMode(v);
                   },
-                  activeColor: Colors.white,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
               ),
-              const Divider(color: Colors.white24),
+              const Divider(),
               const _SectionHeader('Data'),
               ListTile(
-                leading: const Icon(
+                leading: Icon(
                   Icons.delete_outline,
-                  color: Colors.white70,
+                  color: AppTheme.textSecondary(context),
                 ),
-                title: const Text(
+                title: Text(
                   'Clear Cache',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: AppTheme.textPrimary(context)),
                 ),
-                subtitle: const Text(
+                subtitle: Text(
                   'Remove cached weather data',
-                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                  style: TextStyle(
+                    color: AppTheme.textSecondary(context),
+                    fontSize: 12,
+                  ),
                 ),
                 onTap: () => _confirmClearCache(context),
               ),
-              const Divider(color: Colors.white24),
+              const Divider(),
               const _SectionHeader('About'),
-              const ListTile(
-                leading: Icon(Icons.info_outline, color: Colors.white70),
+              ListTile(
+                leading: Icon(
+                  Icons.info_outline,
+                  color: AppTheme.textSecondary(context),
+                ),
                 title: Text(
                   'mcp_ssd_weather',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: AppTheme.textPrimary(context)),
                 ),
                 subtitle: Text(
                   'v1.0.0 · Offline-first weather app',
-                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                  style: TextStyle(
+                    color: AppTheme.textSecondary(context),
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ],
@@ -107,15 +123,15 @@ class SettingsPage extends StatelessWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1A2D45),
-        title: const Text(
+        backgroundColor: AppTheme.surface(ctx),
+        title: Text(
           'Clear cache?',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: AppTheme.textPrimary(ctx)),
         ),
-        content: const Text(
+        content: Text(
           'This will remove all cached weather data. '
           'You will need internet to fetch fresh data.',
-          style: TextStyle(color: Colors.white70),
+          style: TextStyle(color: AppTheme.textSecondary(ctx)),
         ),
         actions: [
           TextButton(
@@ -151,8 +167,8 @@ class _SectionHeader extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
       child: Text(
         label.toUpperCase(),
-        style: const TextStyle(
-          color: Colors.white70,
+        style: TextStyle(
+          color: AppTheme.textSecondary(context),
           fontSize: 12,
           fontWeight: FontWeight.bold,
           letterSpacing: 1.2,

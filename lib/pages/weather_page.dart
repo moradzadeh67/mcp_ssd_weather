@@ -63,7 +63,7 @@ class _WeatherPageState extends State<WeatherPage> {
         // covers the entire physical screen.
         extendBodyBehindAppBar: true,
         extendBody: true,
-        backgroundColor: const Color(0xFF0B1D33),
+        backgroundColor: Colors.transparent,
         body: ListenableBuilder(
           listenable: _notifier,
           builder: (context, _) {
@@ -131,7 +131,7 @@ class _LoadingView extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Container(color: const Color(0xFF0B1D33)),
+        Container(color: Theme.of(context).scaffoldBackgroundColor),
         SafeArea(
           child: Center(
             child: Column(
@@ -164,7 +164,7 @@ class _ErrorView extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Container(color: const Color(0xFF0B1D33)),
+        Container(color: Theme.of(context).scaffoldBackgroundColor),
         SafeArea(
           child: Center(
             child: Padding(
@@ -240,7 +240,53 @@ class _WeatherView extends StatelessWidget {
   }
 
   // Get gradient colors based on weather condition
-  List<Color> _getBackgroundGradient() {
+  List<Color> _getBackgroundGradient(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // ═══════════════════════════════════════════
+    // DARK MODE GRADIENTS (تیرهتر ولی نه مشکی)
+    // ═══════════════════════════════════════════
+    if (isDark) {
+      if (isOffline) {
+        return const [Color(0xFF1A1F2E), Color(0xFF2A2F3E)];
+      }
+      switch (weather.weatherCode) {
+        case 0: // Clear/Sunny
+          return const [Color(0xFF1A2D45), Color(0xFF4A3A2A)];
+        case 1:
+        case 2:
+        case 3: // Cloudy
+          return const [Color(0xFF1A1F2E), Color(0xFF2C3540)];
+        case 45:
+        case 48: // Foggy
+          return const [Color(0xFF1F242E), Color(0xFF2C3540)];
+        case 51:
+        case 53:
+        case 55:
+        case 61:
+        case 63:
+        case 65: // Rainy
+          return const [Color(0xFF0F1A2A), Color(0xFF1A2D45)];
+        case 71:
+        case 73:
+        case 75: // Snowy
+          return const [Color(0xFF1F242E), Color(0xFF3A4048)];
+        case 80:
+        case 81:
+        case 82: // Showers
+          return const [Color(0xFF1A1F2E), Color(0xFF2C3540)];
+        case 95:
+        case 96:
+        case 99: // Thunderstorm
+          return const [Color(0xFF0A0A14), Color(0xFF1A1A2E)];
+        default:
+          return const [Color(0xFF0B1D33), Color(0xFF1A2D45)];
+      }
+    }
+
+    // ═══════════════════════════════════════════
+    // LIGHT MODE GRADIENTS (روشن و رنگی)
+    // ═══════════════════════════════════════════
     if (isOffline) {
       return const [Color(0xFF2C3E50), Color(0xFF555555)];
     }
@@ -289,7 +335,7 @@ class _WeatherView extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: _getBackgroundGradient(),
+          colors: _getBackgroundGradient(context),
         ),
       ),
       child: RefreshIndicator(
@@ -782,7 +828,7 @@ class _ForecastCard extends StatelessWidget {
     final media = MediaQuery.of(context);
     return Container(
       width: (media.size.width * 0.22).clamp(85.0, 110.0),
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
       decoration: BoxDecoration(
         // Darker alpha (0.25) for maximum contrast.
         color: Colors.black.withValues(alpha: 0.25),
@@ -796,23 +842,23 @@ class _ForecastCard extends StatelessWidget {
             isToday ? 'Today' : _getDayName(forecast.date),
             style: TextStyle(
               color: isToday ? Colors.white : Colors.white70,
-              fontSize: (media.size.width * 0.035).clamp(12.0, 14.0),
+              fontSize: (media.size.width * 0.030).clamp(11.0, 13.0),
               fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
             ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4),
           Text(
             forecast.weatherEmoji,
             style: TextStyle(
-              fontSize: (media.size.width * 0.07).clamp(26.0, 32.0),
+              fontSize: (media.size.width * 0.055).clamp(22.0, 28.0),
             ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 4),
           Text(
             _formatForecastTemp(forecast.maxTemp),
             style: TextStyle(
               color: Colors.white,
-              fontSize: (media.size.width * 0.045).clamp(16.0, 20.0),
+              fontSize: (media.size.width * 0.040).clamp(14.0, 18.0),
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -820,7 +866,7 @@ class _ForecastCard extends StatelessWidget {
             _formatForecastTemp(forecast.minTemp),
             style: TextStyle(
               color: Colors.white54,
-              fontSize: (media.size.width * 0.035).clamp(13.0, 16.0),
+              fontSize: (media.size.width * 0.030).clamp(12.0, 14.0),
             ),
           ),
         ],

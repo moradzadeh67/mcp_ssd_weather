@@ -14,57 +14,92 @@ I wanted to build a real-world Flutter weather app that combines **live API data
 
 MCP SSD Weather is my attempt at a **production-ready weather app**: adaptive UI, full offline support, dark mode, weather alerts, and seamless integration with AI agents via MCP Toolkit.
 
+## 🤖 Development Approach
+
+This project was built using **SSD/SPARC methodology** with **AI-assisted development** via [OpenHands](https://github.com/All-Hands-AI/OpenHands). 
+
+The architecture, feature design, and code review were done by me, while AI agents assisted with implementation. 
+
+### My Role
+- **Architecture design** — Layered architecture (Models, Services, State, Pages, Theme)
+- **Feature specification** — 14 features (Weather, Forecasts, Alerts, Cities, Search, Dark Mode, etc.)
+- **Code review** — Reviewed and refined all AI-generated code
+- **Testing strategy** — 59 unit and widget tests
+- **UI/UX decisions** — Responsive design, dynamic gradients, dark mode
+
+### OpenHands' Role
+- **Implementation** — Generated code based on my specifications
+- **Iterative refinement** — Applied fixes and improvements
+- **Git operations** — Commits and pushes on my behalf
+
+### Why This Approach?
+I chose AI-assisted development to:
+1. Focus on **architecture** and **design decisions**
+2. **Accelerate implementation** of well-specified features
+3. **Learn modern workflows** (AI agents are standard in 2026)
+4. **Deliver a production-ready app** faster
+
+This reflects how **modern Flutter development** works — AI handles implementation, developers handle architecture and quality.
+
 ## 📸 Screenshots
 
 ### Android
 
 **Light Mode**
-| Home | Settings | Search | Cities |
-|:---:|:---:|:---:|:---:|
-| ![Home](assets/screenshots/android/home_light.png) | ![Settings](assets/screenshots/android/settings_light.png) | ![Search](assets/screenshots/android/search_light.png) | ![Cities](assets/screenshots/android/cities_light.png) |
+
+<img src="assets/screenshots/android/home_light.png" width="180" />
+<img src="assets/screenshots/android/settings_light.png" width="180" />
+<img src="assets/screenshots/android/search_light.png" width="180" />
+<img src="assets/screenshots/android/cities_light.png" width="180" />
 
 **Dark Mode**
-| Home | Settings |
-|:---:|:---:|
-| ![Home Dark](assets/screenshots/android/home_dark.png) | ![Settings Dark](assets/screenshots/android/settings_dark.png) |
+
+<img src="assets/screenshots/android/home_dark.png" width="180" />
+<img src="assets/screenshots/android/settings_dark.png" width="180" />
 
 ### iOS
 
 **Light Mode**
-| Home | Settings | Search | Cities |
-|:---:|:---:|:---:|:---:|
-| ![Home](assets/screenshots/ios/home_light.png) | ![Settings](assets/screenshots/ios/settings_light.png) | ![Search](assets/screenshots/ios/search_light.png) | ![Cities](assets/screenshots/ios/cities_light.png) |
+
+<img src="assets/screenshots/ios/home_light.png" width="180" />
+<img src="assets/screenshots/ios/settings_light.png" width="180" />
+<img src="assets/screenshots/ios/search_light.png" width="180" />
+<img src="assets/screenshots/ios/cities_light.png" width="180" />
 
 **Dark Mode**
-| Home | Settings |
-|:---:|:---:|
-| ![Home Dark](assets/screenshots/ios/home_dark.png) | ![Settings Dark](assets/screenshots/ios/settings_dark.png) |
+
+<img src="assets/screenshots/ios/home_dark.png" width="180" />
+<img src="assets/screenshots/ios/settings_dark.png" width="180" />
 
 ### macOS
 
 **Light Mode**
-| Home | Settings | Search | Cities |
-|:---:|:---:|:---:|:---:|
-| ![Home](assets/screenshots/macos/home_light.png) | ![Settings](assets/screenshots/macos/settings_light.png) | ![Search](assets/screenshots/macos/search_light.png) | ![Cities](assets/screenshots/macos/cities_light.png) |
+
+<img src="assets/screenshots/macos/home_light.png" width="180" />
+<img src="assets/screenshots/macos/settings_light.png" width="180" />
+<img src="assets/screenshots/macos/search_light.png" width="180" />
+<img src="assets/screenshots/macos/cities_light.png" width="180" />
 
 **Dark Mode**
-| Home | Settings |
-|:---:|:---:|
-| ![Home Dark](assets/screenshots/macos/home_dark.png) | ![Settings Dark](assets/screenshots/macos/settings_dark.png) |
+
+<img src="assets/screenshots/macos/home_dark.png" width="180" />
+<img src="assets/screenshots/macos/settings_dark.png" width="180" />
 
 ### Web
 
 **Light Mode**
-| Home | Settings | Search | Cities |
-|:---:|:---:|:---:|:---:|
-| ![Home](assets/screenshots/web/home_light.png) | ![Settings](assets/screenshots/web/settings_light.png) | ![Search](assets/screenshots/web/search_light.png) | ![Cities](assets/screenshots/web/cities_light.png) |
+
+<img src="assets/screenshots/web/home_light.png" width="180" />
+<img src="assets/screenshots/web/settings_light.png" width="180" />
+<img src="assets/screenshots/web/search_light.png" width="180" />
+<img src="assets/screenshots/web/cities_light.png" width="180" />
 
 **Dark Mode**
-| Home | Settings |
-|:---:|:---:|
-| ![Home Dark](assets/screenshots/web/home_dark.png) | ![Settings Dark](assets/screenshots/web/settings_dark.png) |
 
-> 💡 **Note:** Screenshots are stored in `assets/screenshots/` and organized by platform and theme.
+<img src="assets/screenshots/web/home_dark.png" width="180" />
+<img src="assets/screenshots/web/settings_dark.png" width="180" />
+
+> 💡 **Note:** Screenshots are stored in `assets/screenshots/` and organized by platform.
 
 ## ✨ Features
 

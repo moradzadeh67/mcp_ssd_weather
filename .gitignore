@@ -218,6 +218,7 @@ migrate_working_dir/
 *.iml
 *.ipr
 *.iws
+android/build/
 .idea/
 
 # Flutter/Dart/Pub related

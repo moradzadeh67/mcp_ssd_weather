@@ -9,8 +9,10 @@ An offline-first Flutter weather application built with **SSD/SPARC methodology*
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Web-blue?style=flat-square)]()
 [![Flutter](https://img.shields.io/badge/Flutter-3.47.2-02569B?style=flat-square&logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.13.2-0175C2?style=flat-square&logo=dart&logoColor=white)](https://dart.dev)
+[![CI](https://github.com/moradzadeh67/mcp_ssd_weather/actions/workflows/ci.yml/badge.svg)](https://github.com/moradzadeh67/mcp_ssd_weather/actions/workflows/ci.yml)
+[![Live demo](https://img.shields.io/badge/Live%20demo-moradzadeh67.github.io-blue?style=flat-square)](https://moradzadeh67.github.io/mcp_ssd_weather/)
 
-### 📥 [Download Latest APK](https://github.com/moradzadeh67/mcp_ssd_weather/releases/latest)
+### 📥 [Download Latest APK](https://github.com/moradzadeh67/mcp_ssd_weather/releases/latest) · 🌐 [Try the web demo](https://moradzadeh67.github.io/mcp_ssd_weather/)
 
 **Contents:** [Why I Built This](#-why-i-built-this) · [Development Approach](#-development-approach) · [Screenshots](#-screenshots) · [Features](#-features) · [Methodology: SSD & SPARC](#-methodology-ssd--sparc) · [Tech Stack](#-tech-stack) · [Testing](#-testing) · [Architecture](#-architecture) · [Platform Support](#-platform-support) · [Roadmap](#-roadmap) · [Technical Decisions](#-technical-decisions) · [Installation & Running](#-installation--running) · [Development Environment](#-development-environment) · [Credits & Attribution](#-credits--attribution) · [Contributing](#-contributing) · [License](#-license)
 

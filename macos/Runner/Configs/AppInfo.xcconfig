@@ -8,7 +8,7 @@
 PRODUCT_NAME = mcp_ssd_weather
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.mcpSsdWeather
+PRODUCT_BUNDLE_IDENTIFIER = io.github.moradzadeh67.mcpssdweather
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 moradzadeh67. All rights reserved.

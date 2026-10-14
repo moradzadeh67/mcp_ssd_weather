@@ -1,12 +1,18 @@
 # 🌤️ MCP SSD Weather
 
+![MCP SSD Weather](assets/branding/readme-banner.png)
+
 An offline-first Flutter weather application built with **SSD/SPARC methodology** and **MCP Toolkit** for AI-agent integration.
 
 [![Latest Release](https://img.shields.io/github/v/release/moradzadeh67/mcp_ssd_weather?style=flat-square&color=green)](https://github.com/moradzadeh67/mcp_ssd_weather/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Web-blue?style=flat-square)]()
+[![Flutter](https://img.shields.io/badge/Flutter-3.47.2-02569B?style=flat-square&logo=flutter)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.13.2-0175C2?style=flat-square&logo=dart&logoColor=white)](https://dart.dev)
 
 ### 📥 [Download Latest APK](https://github.com/moradzadeh67/mcp_ssd_weather/releases/latest)
+
+**Contents:** [Why I Built This](#-why-i-built-this) · [Development Approach](#-development-approach) · [Screenshots](#-screenshots) · [Features](#-features) · [Methodology: SSD & SPARC](#-methodology-ssd--sparc) · [Tech Stack](#-tech-stack) · [Testing](#-testing) · [Architecture](#-architecture) · [Platform Support](#-platform-support) · [Roadmap](#-roadmap) · [Technical Decisions](#-technical-decisions) · [Installation & Running](#-installation--running) · [Development Environment](#-development-environment) · [Credits & Attribution](#-credits--attribution) · [Contributing](#-contributing) · [License](#-license)
 
 ## 💡 Why I Built This
 
@@ -139,6 +145,18 @@ This project follows **SSD (Specification-Driven Development)** and **SPARC** wo
 - **Icons**: [`flutter_launcher_icons`](https://pub.dev/packages/flutter_launcher_icons)
 - **Localization**: `flutter_localizations` + `intl`
 
+## ✅ Testing
+
+The test suite runs fully offline — no network access or platform channels are required.
+
+```bash
+# Static analysis (must report zero issues)
+flutter analyze
+
+# Unit + widget tests (59 tests)
+flutter test
+```
+
 ## 🏗️ Architecture
 
 MCP SSD Weather follows a clean layered architecture:
@@ -192,6 +210,30 @@ lib/
 | 🖥️ macOS | ✅ Tested | Apple Silicon |
 | 🪟 Windows | ⚠️ Untested | Build available |
 | 🐧 Linux | ⚠️ Untested | Build available |
+
+## 🗺️ Roadmap
+
+- [x] Real-time weather + 24-hour and 7-day forecasts
+- [x] Offline-first caching with a connectivity check
+- [x] Multi-city support (up to 5 cities)
+- [x] Dark mode and temperature units (°C / °F / K)
+- [x] Weather alerts (7 severity-based types)
+- [x] MCP Toolkit integration for AI agents
+- [ ] Windows desktop — verify the existing build
+- [ ] Linux desktop — verify the existing build
+
+## 🛠️ Technical Decisions
+
+Every technical choice was made to keep the app small, offline-first, and dependency-light:
+
+- **Open-Meteo API:** No API key required — zero configuration and no secrets to leak in a public repository.
+- **`ChangeNotifier` + `ListenableBuilder`:** Flutter's built-in state management, so no extra state-management package is needed.
+- **Custom JSON storage via `path_provider`:** Persistence without a database dependency; cached weather stays readable and portable.
+- **Connectivity check before every request (`connectivity_plus`):** Keeps the app offline-first — cached data is shown instantly when the network is down.
+- **Plain `http`:** A minimal HTTP client instead of a heavier networking stack.
+- **Layered SSD/SPARC architecture:** Models → Services → State → Pages, so business logic never leaks into the UI.
+- **`mcp_toolkit`:** Exposes the app to AI agents at runtime.
+- **`flutter_launcher_icons`:** One source icon generates every platform icon.
 
 ## 🚀 Installation & Running
 

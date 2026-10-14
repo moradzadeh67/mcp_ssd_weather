@@ -174,7 +174,7 @@ logs/
 *.jpg
 *.jpeg
 *.gif
-# Exception: Allow screenshot and diagram assets
+# Exception: Allow screenshot, diagram and branding assets
 !assets/screenshots/**/*.png
 !assets/screenshots/**/*.jpg
 !assets/screenshots/**/*.jpeg
@@ -183,6 +183,10 @@ logs/
 !assets/diagrams/**/*.jpg
 !assets/diagrams/**/*.jpeg
 !assets/diagrams/**/*.gif
+!assets/branding/**/*.png
+!assets/branding/**/*.jpg
+!assets/branding/**/*.jpeg
+!assets/branding/**/*.gif
 
 # Audio files
 *.mp3

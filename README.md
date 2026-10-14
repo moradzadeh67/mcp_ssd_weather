@@ -207,7 +207,7 @@ lib/
 | Platform | Status | Notes |
 |---|:---:|---|
 | 🤖 Android | ✅ Tested | Working |
-| 🍎 iOS | ✅ Tested | Working |
+| 🍎 iOS | ✅ Tested | Runs from source — installing on a device needs your own Apple Developer team |
 | 🌐 Web | ✅ Tested | Chrome, Firefox, Safari compatible |
 | 🖥️ macOS | ✅ Tested | Apple Silicon |
 | 🪟 Windows | ⚠️ Untested | Build available |
@@ -277,6 +277,17 @@ flutter build ios --release
 # Build Web distribution
 flutter build web --release
 ```
+
+> 💡 **Note on iOS signing:** there is no prebuilt iOS build to download, because iOS apps cannot be side-loaded the way Android APKs can. The iOS target works, but you sign it yourself:
+>
+> 1. Open `ios/Runner.xcodeproj` in Xcode.
+> 2. Select the **Runner** target, then the **Signing & Capabilities** tab.
+> 3. Sign in with your Apple ID and choose your team under **Team**.
+> 4. Run it from Xcode or with `flutter run`, and it installs on your device.
+>
+> A free Apple ID is enough to run the app on your own device. Publishing to **TestFlight** or the **App Store** needs a paid Apple Developer Program membership, and at that point you register an App ID for the bundle identifier `io.github.moradzadeh67.mcpssdweather`.
+>
+> If you are contributing, just use your own team — nothing in the repository needs to change.
 
 ## 💻 Development Environment
 

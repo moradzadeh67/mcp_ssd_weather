@@ -1,6 +1,6 @@
 {
-    "name": "weather_db_api_spare",
-    "short_name": "weather_db_api_spare",
+    "name": "MCP SSD Weather",
+    "short_name": "MCP SSD Weather",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0C2340",

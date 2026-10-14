@@ -241,8 +241,8 @@ Every technical choice was made to keep the app small, offline-first, and depend
 
 ### Prerequisites
 
-- [Flutter SDK](https://docs.flutter.dev/get-started/install) (v3.13.2+)
-- Dart SDK (v3.x)
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) — stable channel, tested with Flutter 3.47.2
+- Dart SDK 3.13.2 — bundled with the Flutter version above
 
 ### Getting Started
 
@@ -291,11 +291,13 @@ flutter build web --release
 
 ## 💻 Development Environment
 
-This project is actively developed and tested using:
-- **OS**: macOS (Apple Silicon)
+This project is developed and tested on:
+
+- **Hardware**: MacBook Pro (Apple M3 Pro)
+- **OS**: macOS 27.0.1
 - **IDE**: VS Code / Android Studio
-- **iOS/macOS Build Toolchain**: Xcode 14+
-- **Flutter Framework**: Flutter 3.13+
+- **Xcode**: Xcode 27.0
+- **Flutter**: Flutter 3.47.2 • channel stable • https://github.com/flutter/flutter.git
 
 ## 🙏 Credits & Attribution
 

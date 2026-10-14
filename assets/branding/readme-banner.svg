@@ -1,0 +1,52 @@
+<!--
+  Source file for assets/branding/readme-banner.png
+  Regenerate the PNG with:
+    rsvg-convert -o readme-banner.png readme-banner.svg
+-->
+<svg width="1600" height="420" viewBox="0 0 1600 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#17385C"/>
+      <stop offset="52%" stop-color="#0C2340"/>
+      <stop offset="100%" stop-color="#061225"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="20%" cy="28%" r="72%">
+      <stop offset="0%" stop-color="#2A5C93" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#2A5C93" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sunA" cx="38%" cy="34%" r="78%">
+      <stop offset="0%" stop-color="#FFF7C8"/>
+      <stop offset="40%" stop-color="#FFD35C"/>
+      <stop offset="78%" stop-color="#F79E2E"/>
+      <stop offset="100%" stop-color="#E8792B"/>
+    </radialGradient>
+    <radialGradient id="sunglowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFCF6A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#FFCF6A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cloudA" x1="0.15" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="55%" stop-color="#E4EFFF"/>
+      <stop offset="100%" stop-color="#BBD4F5"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="420" rx="34" fill="url(#bgA)"/>
+  <rect x="3" y="3" width="1594" height="414" rx="31" fill="none" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
+  <rect x="0" y="0" width="1600" height="420" rx="34" fill="url(#glowA)"/>
+
+  <g transform="translate(115,58) scale(0.297)">
+    <circle cx="685" cy="415" r="235" fill="url(#sunglowA)"/>
+    <circle cx="685" cy="415" r="150" fill="url(#sunA)"/>
+    <g fill="url(#cloudA)">
+      <circle cx="470" cy="590" r="155"/>
+      <circle cx="630" cy="612" r="135"/>
+      <circle cx="345" cy="650" r="100"/>
+      <rect x="330" y="585" width="410" height="145" rx="72"/>
+    </g>
+  </g>
+
+  <text x="500" y="196" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="102" font-weight="700" fill="#FFFFFF" letter-spacing="-2">MCP SSD Weather</text>
+  <text x="506" y="256" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="36" font-weight="500" fill="#9CC4F5">Offline-first Flutter weather app</text>
+  <text x="506" y="318" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="25" font-weight="600" fill="#6E8AB0" letter-spacing="3">SSD/SPARC · MCP TOOLKIT · ANDROID · iOS · macOS · WEB</text>
+</svg>

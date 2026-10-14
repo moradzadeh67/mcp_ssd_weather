@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#0C2340",
     "theme_color": "#0C2340",
-    "description": "A new Flutter project.",
+    "description": "An offline-first Flutter weather app built with SSD/SPARC methodology and MCP Toolkit for AI-agent integration.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

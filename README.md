@@ -108,9 +108,9 @@ strip), then the settings page switching the app from the dark theme to light.
 
 **Dark Mode**
 
-| Home | Settings | (Empty) | (Empty) |
+| Home | Settings | Search | Cities |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screenshots/android/home_dark.png" width="150" /> | <img src="assets/screenshots/android/settings_dark.png" width="150" /> | | |
+| <img src="assets/screenshots/android/home_dark.png" width="150" /> | <img src="assets/screenshots/android/settings_dark.png" width="150" /> | <img src="assets/screenshots/android/search_dark.png" width="150" /> | <img src="assets/screenshots/android/cities_dark.png" width="150" /> |
 
 ### iOS
 
@@ -136,9 +136,9 @@ strip), then the settings page switching the app from the dark theme to light.
 
 **Dark Mode**
 
-| Home | Settings | (Empty) | (Empty) |
+| Home | Settings | Search | Cities |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screenshots/macos/home_dark.png" width="150" /> | <img src="assets/screenshots/macos/settings_dark.png" width="150" /> | | |
+| <img src="assets/screenshots/macos/home_dark.png" width="150" /> | <img src="assets/screenshots/macos/settings_dark.png" width="150" /> | <img src="assets/screenshots/macos/search_dark.png" width="150" /> | <img src="assets/screenshots/macos/cities_dark.png" width="150" /> |
 
 ### Web
 
@@ -150,9 +150,9 @@ strip), then the settings page switching the app from the dark theme to light.
 
 **Dark Mode**
 
-| Home | Settings | (Empty) | (Empty) |
+| Home | Settings | Search | Cities |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screenshots/web/home_dark.png" width="150" /> | <img src="assets/screenshots/web/settings_dark.png" width="150" /> | | |
+| <img src="assets/screenshots/web/home_dark.png" width="150" /> | <img src="assets/screenshots/web/settings_dark.png" width="150" /> | <img src="assets/screenshots/web/search_dark.png" width="150" /> | <img src="assets/screenshots/web/cities_dark.png" width="150" /> |
 
 > 💡 **Note:** Screenshots are stored in `assets/screenshots/` and organized by platform and theme.
 

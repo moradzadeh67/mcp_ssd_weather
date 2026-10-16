@@ -9,6 +9,8 @@ All notable changes to MCP SSD Weather are documented here. The format follows
 ### Added
 - `docs/ARCHITECTURE.md`, `docs/PRIVACY.md`, `docs/RELEASE.md`, `SECURITY.md` and this changelog.
 - Demo GIF in the README, captured from the running macOS app (dark → settings → light).
+- Dark-theme screenshots for **Search** and **Cities** on macOS, Android and Web, completing the four-shot
+  set in every dark-mode table except iOS (which needs a working simulator or a physical device).
 - README sections: *What is MCP SSD Weather?*, *Demo*, *Key Dependencies*, *Privacy & Security*,
   *Release Signing*, *CI/CD*, *Known Limitations*, *FAQ* and *Requirements*.
 - Complete zipped backup of the Android upload key

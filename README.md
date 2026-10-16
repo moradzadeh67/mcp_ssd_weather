@@ -1,20 +1,58 @@
-# 🌤️ MCP SSD Weather
+<p align="center">
+  <a href="https://github.com/moradzadeh67/mcp_ssd_weather">
+    <img src="assets/branding/readme-banner.png" width="100%" alt="MCP SSD Weather Banner">
+  </a>
+</p>
 
-![MCP SSD Weather](assets/branding/readme-banner.png)
+<p align="center">
+  <a href="https://github.com/moradzadeh67/mcp_ssd_weather/releases/latest">
+    <img src="https://img.shields.io/github/v/release/moradzadeh67/mcp_ssd_weather?style=for-the-badge&color=2e7d32" alt="Latest Release">
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-orange.svg?style=for-the-badge" alt="License MIT">
+  </a>
+  <a href="https://flutter.dev">
+    <img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Web-02569B?style=for-the-badge&logo=flutter" alt="Platform Support">
+  </a>
+  <a href="https://flutter.dev">
+    <img src="https://img.shields.io/badge/Flutter-3.47.2-02569B?style=for-the-badge&logo=flutter" alt="Flutter">
+  </a>
+  <a href="https://dart.dev">
+    <img src="https://img.shields.io/badge/Dart-3.13.2-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart">
+  </a>
+  <a href="https://github.com/moradzadeh67/mcp_ssd_weather/actions/workflows/ci.yml">
+    <img src="https://github.com/moradzadeh67/mcp_ssd_weather/actions/workflows/ci.yml/badge.svg" alt="CI Status">
+  </a>
+  <a href="https://moradzadeh67.github.io/mcp_ssd_weather/">
+    <img src="https://img.shields.io/badge/Live%20Web%20Demo-moradzadeh67.github.io-blue?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Demo">
+  </a>
+</p>
 
-An offline-first Flutter weather application built with **SSD/SPARC methodology** and **MCP Toolkit** for AI-agent integration.
+<p align="center">
+  <a href="https://github.com/moradzadeh67/mcp_ssd_weather/releases/latest"><b>📥 Download APK</b></a> •
+  <a href="https://moradzadeh67.github.io/mcp_ssd_weather/"><b>🌐 Live Web Demo</b></a> •
+  <a href="#-features"><b>✨ Features</b></a> •
+  <a href="#-architecture"><b>🏗️ Architecture</b></a> •
+  <a href="#-installation--running"><b>🚀 Getting Started</b></a> •
+  <a href="#-troubleshooting--faq"><b>❓ FAQ</b></a>
+</p>
 
-[![Latest Release](https://img.shields.io/github/v/release/moradzadeh67/mcp_ssd_weather?style=flat-square&color=green)](https://github.com/moradzadeh67/mcp_ssd_weather/releases/latest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Web-blue?style=flat-square)]()
-[![Flutter](https://img.shields.io/badge/Flutter-3.47.2-02569B?style=flat-square&logo=flutter)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.13.2-0175C2?style=flat-square&logo=dart&logoColor=white)](https://dart.dev)
-[![CI](https://github.com/moradzadeh67/mcp_ssd_weather/actions/workflows/ci.yml/badge.svg)](https://github.com/moradzadeh67/mcp_ssd_weather/actions/workflows/ci.yml)
-[![Live demo](https://img.shields.io/badge/Live%20demo-moradzadeh67.github.io-blue?style=flat-square)](https://moradzadeh67.github.io/mcp_ssd_weather/)
+---
 
-### 📥 [Download Latest APK](https://github.com/moradzadeh67/mcp_ssd_weather/releases/latest) · 🌐 [Try the web demo](https://moradzadeh67.github.io/mcp_ssd_weather/)
+## 🌍 What is MCP SSD Weather?
 
-**Contents:** [Why I Built This](#-why-i-built-this) · [Development Approach](#-development-approach) · [Screenshots](#-screenshots) · [Features](#-features) · [Methodology: SSD & SPARC](#-methodology-ssd--sparc) · [Tech Stack](#-tech-stack) · [Testing](#-testing) · [Architecture](#-architecture) · [Platform Support](#-platform-support) · [Roadmap](#-roadmap) · [Technical Decisions](#-technical-decisions) · [Installation & Running](#-installation--running) · [Development Environment](#-development-environment) · [Credits & Attribution](#-credits--attribution) · [Contributing](#-contributing) · [License](#-license)
+**MCP SSD Weather** is a **free, open-source weather app** built with **Flutter**, running on
+**Android, iOS, macOS and the web**. It is **offline-first** and needs **no API key**.
+
+Look up a city and see the current conditions, a 24-hour strip, a 7-day forecast and severity-based
+weather alerts — then keep working when the network drops, because everything is cached locally.
+
+- ✅ **100% free** — no accounts, no ads, no tracking, no backend
+- ✅ **MIT licensed** — read it, fork it, ship it
+- ✅ **No API key required** — Open-Meteo is open, so there is nothing to configure or leak
+- ✅ **Offline-first** — cache-first rendering with a connectivity check and graceful fallback
+- ✅ **Agent-addressable** — MCP Toolkit exposes the app's state to AI agents running on your machine
+- ✅ **Built with SSD/SPARC** — specification-driven, layered architecture
 
 ## 💡 Why I Built This
 
@@ -48,6 +86,15 @@ I chose AI-assisted development to:
 4. **Deliver a production-ready app** faster
 
 This reflects how **modern Flutter development** works — AI handles implementation, developers handle architecture and quality.
+
+## 🎬 Demo
+
+<p align="center">
+  <img src="assets/demo/demo.gif" width="420" alt="MCP SSD Weather demo: the Tehran forecast on the dark theme, then the settings page switching to light mode">
+</p>
+
+A quick tour: live conditions for Tehran (temperature, humidity, wind, pressure, feels-like, hourly
+strip), then the settings page switching the app from the dark theme to light.
 
 ## 📸 Screenshots
 
@@ -147,6 +194,23 @@ This project follows **SSD (Specification-Driven Development)** and **SPARC** wo
 - **Icons**: [`flutter_launcher_icons`](https://pub.dev/packages/flutter_launcher_icons)
 - **Localization**: `flutter_localizations` + `intl`
 
+### Key Dependencies
+
+| Package | Version | Purpose |
+|---|:---:|---|
+| `http` | `^1.2.2` | Minimal client for the two Open-Meteo REST endpoints |
+| `connectivity_plus` | `^7.3.1` | Network-status check so cached data is shown first when offline |
+| `path_provider` | `^2.1.5` | Locates the app support directory for the JSON cache |
+| `path` | `^1.9.1` | Safe path joining for the cache files |
+| `mcp_toolkit` | `^0.3.0` | Exposes the app's state to MCP-capable AI agents |
+| `intl` | `^0.20.2` | Number/date formatting (plus `flutter_localizations`) |
+| `url_launcher` | `^6.3.1` | Opening external links (e.g. Open-Meteo attribution) |
+
+> 💡 **Note:** Versions are the constraints declared in `pubspec.yaml`. Resolved at the time of writing
+> (`pubspec.lock`): `http` 1.6.0, `connectivity_plus` 7.3.1, `mcp_toolkit` 0.3.0, `path_provider` 2.1.5,
+> `intl` 0.20.3, `url_launcher` 6.3.2. `flutter_launcher_icons` is a dev dependency (build-time icon
+> generation).
+
 ## ✅ Testing
 
 The test suite runs fully offline — no network access or platform channels are required.
@@ -158,6 +222,60 @@ flutter analyze
 # Unit + widget tests (59 tests)
 flutter test
 ```
+
+## 🔒 Privacy & Security
+
+> [!IMPORTANT]
+> - **No accounts, no analytics, no telemetry, no backend.** Nothing is collected about you.
+> - **Only Open-Meteo is contacted** — the city's coordinates (and the text you type in search) go to the public Open-Meteo API over HTTPS. No API key, no identifier.
+> - **Everything else stays local** — cached weather, saved cities and settings are JSON files inside the app's own container; *Settings → Clear Cache* wipes the weather cache.
+> - **No location permission is requested** — you pick cities by search.
+> - **MCP** exposes read-only state to an agent running on your machine; the app itself never sends data to a model provider.
+
+Details: [docs/PRIVACY.md](docs/PRIVACY.md) · Vulnerability reports: [SECURITY.md](SECURITY.md).
+
+## 🔐 Release Signing
+
+Android releases are signed with the project's **upload key** (`mcp_ssd_weather-upload.jks`, alias
+`upload`). The keystore lives **outside** this repository; credentials are read from
+`android/key.properties`, which is git-ignored and never committed.
+
+```properties
+# android/key.properties — NEVER commit this file
+storePassword=YOUR_STORE_PASSWORD_HERE
+keyPassword=YOUR_KEY_PASSWORD_HERE
+keyAlias=upload
+storeFile=/absolute/path/to/your/upload-keystore.jks
+```
+
+```bash
+flutter build apk --release
+$ANDROID_HOME/build-tools/<version>/apksigner verify --print-certs \
+  build/app/outputs/flutter-apk/app-release.apk
+```
+
+> [!NOTE]
+> If `android/key.properties` is missing — on a fresh clone, for example — Gradle automatically falls back
+> to the debug signing key. The build never breaks; it simply is not signed with the release key.
+
+> [!CAUTION]
+> Keep the keystore and its passwords backed up (the author keeps a zipped copy on an external backup).
+> If the upload key is lost you can no longer publish updates for `io.github.moradzadeh67.mcpssdweather`.
+
+Full release process and the key's verified fingerprint: [docs/RELEASE.md](docs/RELEASE.md).
+
+## 🔄 CI/CD
+
+| Workflow | Trigger | What it does |
+|---|---|---|
+| [`ci.yml`](.github/workflows/ci.yml) | push / PR / manual | Runs `flutter analyze` and `flutter test` |
+| [`deploy-web.yml`](.github/workflows/deploy-web.yml) | push to `main` | Builds the web bundle and publishes it to GitHub Pages |
+
+**Published site:** <https://moradzadeh67.github.io/mcp_ssd_weather/>
+
+> [!NOTE]
+> No secrets live in this repository: `android/key.properties`, `*.jks` and `*.keystore` are ignored by
+> Git, and the app needs no API key at all.
 
 ## 🏗️ Architecture
 
@@ -289,6 +407,53 @@ flutter build web --release
 >
 > If you are contributing, just use your own team — nothing in the repository needs to change.
 
+## ⚠️ Known Limitations
+
+- **Cached data can be stale** — when offline the app shows the last successful fetch, with the update time visible.
+- **iOS is source-only** — there is no downloadable iOS build; you sign it with your own Apple team (see the note under *Building*).
+- **Windows and Linux are untested** — build folders exist but nobody has verified them.
+- **No location auto-detection** — cities are chosen by search by design (that is also why no location permission is requested).
+- **Alerts are heuristic** — the 7 alert types are derived from the forecast data, not from official government warnings.
+
+## ❓ Troubleshooting & FAQ
+
+<details>
+<summary><b>1. The app shows old data / "offline" badge.</b></summary>
+
+That is the offline-first behaviour: the cached snapshot is rendered immediately and refreshed when the
+network is available. Tap **Update Weather**, or clear the cache from **Settings → Clear Cache** to force a
+fresh fetch.
+</details>
+
+<details>
+<summary><b>2. Do I need an API key?</b></summary>
+
+No. Weather data and city search come from the public **Open-Meteo** API, which needs no key. There is
+nothing to configure and no secret in the repository.
+</details>
+
+<details>
+<summary><b>3. Why doesn't it use my current location?</b></summary>
+
+By design: no location permission is requested. Search for your city (up to 5 can be saved and renamed)
+and the app remembers them.
+</details>
+
+<details>
+<summary><b>4. What is the MCP Toolkit part for?</b></summary>
+
+It exposes the app's state as tools that an MCP-capable AI agent running on your machine can query. If you
+do not use an MCP client, the tools are simply registered and never called — the app works exactly the
+same. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+</details>
+
+<details>
+<summary><b>5. Where is my data stored?</b></summary>
+
+In JSON files inside the app's own container (cached weather, saved cities, settings). Removing the app
+removes them. See [docs/PRIVACY.md](docs/PRIVACY.md).
+</details>
+
 ## 💻 Development Environment
 
 This project is developed and tested on:
@@ -298,6 +463,14 @@ This project is developed and tested on:
 - **IDE**: VS Code / Android Studio
 - **Xcode**: Xcode 27.0
 - **Flutter**: Flutter 3.47.2 • channel stable • https://github.com/flutter/flutter.git
+
+## 📋 Requirements
+
+- Flutter SDK 3.47.2 (stable)
+- Dart SDK 3.13.2
+- Android: SDK 24+ (`minSdk 24`) for the Android build
+- iOS/macOS: Xcode 15+ (development used Xcode 27.0)
+- Web: any modern browser
 
 ## 🙏 Credits & Attribution
 
@@ -309,6 +482,8 @@ Weather data by Open-Meteo.com
 ## 🤝 Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to get started.
+Security problems: please **do not** open a public issue — see [SECURITY.md](SECURITY.md).
+Release history: [CHANGELOG.md](CHANGELOG.md).
 
 ## 📄 License
 

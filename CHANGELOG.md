@@ -19,6 +19,9 @@ All notable changes to MCP SSD Weather are documented here. The format follows
 
 ### Changed
 - Badges upgraded to `for-the-badge`, a release badge and a centered banner were added.
+- **Fixed: the Settings → About tile showed a hardcoded `v1.0.0`.** The version now comes from the
+  platform via `package_info_plus` (`AppInfo`), so it always matches `pubspec.yaml`
+  (verified on macOS: `v1.0.1`).
 
 ## [1.0.1] — 2026-10-14
 

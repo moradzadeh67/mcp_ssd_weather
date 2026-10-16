@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mcp_toolkit/mcp_toolkit.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'pages/weather_page.dart';
 import 'services/api_service.dart';
@@ -11,6 +12,7 @@ import 'services/storage_service.dart';
 import 'state/settings_notifier.dart';
 import 'state/weather_notifier.dart';
 import 'theme/app_theme.dart';
+import 'utils/app_info.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -36,6 +38,14 @@ Future<void> main() async {
           systemNavigationBarIconBrightness: Brightness.light,
         ),
       );
+
+      // App version for the About tile, straight from pubspec via the platform.
+      // Wrapped so a lookup failure never blocks startup.
+      try {
+        AppInfo.version = (await PackageInfo.fromPlatform()).version;
+      } catch (_) {
+        AppInfo.version = 'dev';
+      }
 
       // Simple dependency injection
       final storageService = StorageService();

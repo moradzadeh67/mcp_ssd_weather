@@ -43,6 +43,8 @@ Latest: **v1.0.1** (signed APK, app id `io.github.moradzadeh67.mcpssdweather`).
 
 1. `flutter analyze` clean and `flutter test` green.
 2. Bump `version:` in `pubspec.yaml`; the tag must match (`vX.Y.Z`). v1.0.1's tag matched `1.0.1+2`.
+   The in-app About tile reads this version from the platform (`package_info_plus` → `AppInfo`), so it
+   needs no manual update.
 3. `flutter build apk --release` and verify the signature:
    `apksigner verify --print-certs build/app/outputs/flutter-apk/app-release.apk`.
 4. Create the GitHub release and attach the APK; publish its **SHA-256** in the notes

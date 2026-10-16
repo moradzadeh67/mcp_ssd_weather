@@ -4,6 +4,7 @@ import 'package:mcp_ssd_weather/models/settings_model.dart';
 import 'package:mcp_ssd_weather/pages/settings_page.dart';
 import 'package:mcp_ssd_weather/services/storage_service.dart';
 import 'package:mcp_ssd_weather/state/settings_notifier.dart';
+import 'package:mcp_ssd_weather/utils/app_info.dart';
 
 class FakeStorageService extends StorageService {
   SettingsModel? savedSettings;
@@ -57,7 +58,7 @@ void main() {
         final aboutFinder = find.text('mcp_ssd_weather');
         await tester.scrollUntilVisible(aboutFinder, 100.0);
         expect(aboutFinder, findsOneWidget);
-        expect(find.text('v1.0.0 · Offline-first weather app'), findsOneWidget);
+        expect(find.text(AppInfo.label), findsOneWidget);
       },
     );
 

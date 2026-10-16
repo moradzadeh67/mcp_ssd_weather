@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/settings_model.dart';
 import '../state/settings_notifier.dart';
 import '../theme/app_theme.dart';
+import '../utils/app_info.dart';
 
 class SettingsPage extends StatelessWidget {
   final SettingsNotifier notifier;
@@ -106,7 +107,7 @@ class SettingsPage extends StatelessWidget {
                   style: TextStyle(color: AppTheme.textPrimary(context)),
                 ),
                 subtitle: Text(
-                  'v1.0.0 · Offline-first weather app',
+                  AppInfo.label,
                   style: TextStyle(
                     color: AppTheme.textSecondary(context),
                     fontSize: 12,

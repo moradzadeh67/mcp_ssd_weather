@@ -12,7 +12,7 @@ Pages**. There is no store listing.
 | macOS | build from source (`flutter build macos --release`) | not notarized |
 | iOS | build from source — installing on a device needs your own Apple Developer team | no distribution yet |
 
-Latest: **v1.0.1** (signed APK, app id `io.github.moradzadeh67.mcpssdweather`).
+Latest: **v1.0.2** (signed APK, app id `io.github.moradzadeh67.mcpssdweather`).
 
 ## Android release signing
 
@@ -47,10 +47,21 @@ Latest: **v1.0.1** (signed APK, app id `io.github.moradzadeh67.mcpssdweather`).
    needs no manual update.
 3. `flutter build apk --release` and verify the signature:
    `apksigner verify --print-certs build/app/outputs/flutter-apk/app-release.apk`.
-4. Create the GitHub release and attach the APK; publish its **SHA-256** in the notes
-   (v1.0.1's hash: `9d159399fdce301dbd086667cfa1ba0c89843068bc908e46c1283969c78b9528`).
+4. Create the GitHub release and attach the APK; publish its **SHA-256** in the notes and in the
+   *Released* table below.
 5. Confirm the Pages deploy succeeded (`gh run list`).
 6. Update `README.md` and `CHANGELOG.md`.
+
+## Released
+
+| Tag | Asset | SHA-256 of the APK |
+|---|---|---|
+| v1.0.2 | `mcp_ssd_weather-v1.0.2.apk` | `f8890275943f952e37d55472d4d01ab75e2d9eddf686314e74a7cb7281a6bc9c` |
+| v1.0.1 | `mcp_ssd_weather-v1.0.1.apk` | `9d159399fdce301dbd086667cfa1ba0c89843068bc908e46c1283969c78b9528` |
+
+Certificate fingerprint of the upload key (both releases, verified with `apksigner --print-certs`):
+`76:22:77:5A:BF:38:65:A9:6F:15:B9:CC:83:DC:F5:43:E2:C9:B0:3E:03:6A:EF:DF:12:01:92:57:BF:DC:48:56`
+— i.e. v1.0.2 installs as an update over v1.0.1.
 
 ## Outstanding
 

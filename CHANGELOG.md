@@ -4,13 +4,13 @@ All notable changes to MCP SSD Weather are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [1.0.2] — 2026-10-16
 
 ### Added
 - `docs/ARCHITECTURE.md`, `docs/PRIVACY.md`, `docs/RELEASE.md`, `SECURITY.md` and this changelog.
 - Demo GIF in the README, captured from the running macOS app (dark → settings → light).
-- Dark-theme screenshots for **Search** and **Cities** on macOS, Android and Web, completing the four-shot
-  set in every dark-mode table except iOS (which needs a working simulator or a physical device).
+- Dark-theme screenshots for **Search** and **Cities** on all four platforms (macOS, Android, iOS and
+  Web), completing the four-shot set in every dark-mode table.
 - README sections: *What is MCP SSD Weather?*, *Demo*, *Key Dependencies*, *Privacy & Security*,
   *Release Signing*, *CI/CD*, *Known Limitations*, *FAQ* and *Requirements*.
 - Complete zipped backup of the Android upload key

@@ -122,9 +122,9 @@ strip), then the settings page switching the app from the dark theme to light.
 
 **Dark Mode**
 
-| Home | Settings | (Empty) | (Empty) |
+| Home | Settings | Search | Cities |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screenshots/ios/home_dark.png" width="150" /> | <img src="assets/screenshots/ios/settings_dark.png" width="150" /> | | |
+| <img src="assets/screenshots/ios/home_dark.png" width="150" /> | <img src="assets/screenshots/ios/settings_dark.png" width="150" /> | <img src="assets/screenshots/ios/search_dark.png" width="150" /> | <img src="assets/screenshots/ios/cities_dark.png" width="150" /> |
 
 ### macOS
 

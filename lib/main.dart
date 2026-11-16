@@ -1,8 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:cupertino_ui/cupertino_ui.dart' show GlobalCupertinoLocalizations;
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+// GlobalMaterialLocalizations now comes from package:material_ui and
+// GlobalCupertinoLocalizations from package:cupertino_ui; only the widget
+// localizations delegate stays here.
+import 'package:flutter_localizations/flutter_localizations.dart'
+    hide GlobalMaterialLocalizations, GlobalCupertinoLocalizations;
 import 'package:mcp_toolkit/mcp_toolkit.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 

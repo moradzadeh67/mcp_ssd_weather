@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Responsive sizes for all screen sizes (5" to 7" and beyond).
 class ResponsiveSizes {

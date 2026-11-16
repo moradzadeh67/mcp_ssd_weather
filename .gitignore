@@ -271,3 +271,4 @@ key.properties
 .artifacts/
 AGENTS.md.artifacts/
 lib/generated/
+.backup-*/
